@@ -7,4 +7,5 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_add_rit">AddRitActivity</string>
+    <string name="title_activity_history">HistoryActivity</string>
 </resources>

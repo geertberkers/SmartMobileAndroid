@@ -72,13 +72,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nieuwe rit"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:onClick="addRitOnClick"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Geschiedenis"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:onClick="historyOnClick"/>
         </TableLayout>
 
 

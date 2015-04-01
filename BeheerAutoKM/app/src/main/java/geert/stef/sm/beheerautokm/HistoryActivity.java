@@ -1,25 +1,24 @@
 package geert.stef.sm.beheerautokm;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-public class Overview extends ActionBarActivity {
+
+public class HistoryActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_overview);
+        setContentView(R.layout.activity_history);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_overview, menu);
+        getMenuInflater().inflate(R.menu.menu_history, menu);
         return true;
     }
 
@@ -36,15 +35,5 @@ public class Overview extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void addRitOnClick(View view) {
-        Intent intent = new Intent(this, AddRitActivity.class);
-        this.startActivity(intent);
-    }
-
-    public void historyOnClick(View view) {
-        Intent intent = new Intent(this, HistoryActivity.class);
-        this.startActivity(intent);
     }
 }
