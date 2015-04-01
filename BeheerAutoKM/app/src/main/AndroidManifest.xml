@@ -36,6 +36,10 @@
             android:name=".Overview"
             android:label="@string/title_activity_overview" >
         </activity>
+        <activity
+            android:name=".AddRitActivity"
+            android:label="@string/title_activity_add_rit" >
+        </activity>
     </application>
 
 </manifest>
