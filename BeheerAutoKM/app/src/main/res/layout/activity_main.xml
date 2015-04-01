@@ -18,10 +18,51 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="@string/namePerson"
+        android:text=""
+        android:textSize="20dp"
+        android:textColor="@color/red"
+        android:id="@+id/txt_ingelogd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true" />
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:text="Username"
+        android:textSize="30dp"
+        android:id="@+id/txt_username"
+        android:layout_below="@+id/txt_ingelogd"
+        android:layout_centerHorizontal="true"
+        android:singleLine="true"/>
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:textSize="30dp"
+        android:text="Password"
+        android:id="@+id/txt_password"
+        android:layout_below="@+id/txt_username"
+        android:layout_centerHorizontal="true"
+        android:singleLine="true"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:textSize="30dp"
+        android:id="@+id/btn_login"
+        android:layout_below="@+id/txt_password"
+        android:layout_centerHorizontal="true"
+        android:text="Log in!"
+        android:onClick="logIn"/>
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:textSize="30dp"
+        android:id="@+id/btn_createAccount"
+        android:layout_below="@+id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:text="Create account"
+        android:onClick="createAccount"/> />
 
 </RelativeLayout>
