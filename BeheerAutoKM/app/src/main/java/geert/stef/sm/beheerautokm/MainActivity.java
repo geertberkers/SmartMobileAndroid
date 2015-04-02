@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
     Manager manager;
-    EditText txt_username;
-    EditText txt_password;
-    TextView txt_ingelogd;
+    EditText txtUsername;
+    EditText txtPassword;
+    TextView txtInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,25 +22,25 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         manager = new Manager();
 
-        txt_ingelogd = (TextView)findViewById(R.id.txt_ingelogd);
-        txt_username   = (EditText)findViewById(R.id.txt_username);
-        txt_password = (EditText)findViewById(R.id.txt_password);
+        txtInfo = (TextView)findViewById(R.id.txtInfo);
+        txtUsername = (EditText)findViewById(R.id.txtUsername);
+        txtPassword = (EditText)findViewById(R.id.txtPassword);
 
-        txt_username.setOnTouchListener(new View.OnTouchListener() {
+        txtUsername.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (txt_username.getText().toString().equals("Username")) {
-                    txt_username.setText("");
+                if (txtUsername.getText().toString().equals("Username")) {
+                    txtUsername.setText("");
                 }
                 return false;
             }
         });
 
-        txt_password.setOnFocusChangeListener( new View.OnFocusChangeListener() {
+        txtPassword.setOnFocusChangeListener( new View.OnFocusChangeListener() {
 
             public void onFocusChange( View v, boolean hasFocus ) {
                 if( hasFocus ) {
-                    txt_password.setText("");
+                    txtPassword.setText("");
                 }
             }
 
@@ -50,19 +50,14 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -71,10 +66,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void logIn(View view) {
-        boolean ingelogd = manager.Login(this, txt_username.getText().toString(), txt_password.getText().toString());
-        if(!ingelogd)
+        boolean loggedIn = manager.Login(this, txtUsername.getText().toString(), txtPassword.getText().toString());
+        if(!loggedIn)
         {
-            txt_ingelogd.setText("Inloggen mislukt.");
+            txtInfo.setText(R.string.logInFailed);
         }
     }
 
