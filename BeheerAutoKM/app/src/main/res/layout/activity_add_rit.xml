@@ -7,8 +7,8 @@
     tools:context="geert.stef.sm.beheerautokm.AddRitActivity">
 
     <Spinner
-        android:id="@+id/planets_spinner"
+        android:id="@+id/spinner_cars"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

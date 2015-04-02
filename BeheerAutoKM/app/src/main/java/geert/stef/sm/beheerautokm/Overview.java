@@ -13,6 +13,13 @@ public class Overview extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
+
+
+        if (getIntent().getExtras() != null) {
+            for(String a : getIntent().getExtras().getStringArrayList("items_to_parse")) {
+                //a = naam van auto
+            }
+        }
     }
 
 

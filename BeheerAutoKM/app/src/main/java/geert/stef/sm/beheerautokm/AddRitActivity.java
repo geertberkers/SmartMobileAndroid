@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Spinner;
 
 
 public class AddRitActivity extends ActionBarActivity {
@@ -12,6 +13,9 @@ public class AddRitActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_rit);
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_cars);
+        //ArrayAdapter<Car> ca
     }
 
 
