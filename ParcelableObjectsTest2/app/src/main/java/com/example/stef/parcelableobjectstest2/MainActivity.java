@@ -1,35 +1,38 @@
-package geert.stef.sm.beheerautokm;
+package com.example.stef.parcelableobjectstest2;
 
 import android.content.Intent;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
-public class Overview extends ActionBarActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class MainActivity extends ActionBarActivity {
+    List<MyListClass> arrList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_overview);
+        setContentView(R.layout.activity_main);
+        arrList.add(new MyListClass());
+        arrList.get(0).setTest(200);
 
-        Bundle b = getIntent().getExtras();
-        Object object = b.getParcelable("parcel");
+        MyParcelable object = new MyParcelable();
+        object.setMyInt(100);
+        object.setArrList(arrList);
 
-        TextView tv = (TextView) findViewById(R.id.txtBouwjaar);
-        //Car c = object.getCars().get(0);
-        //tv.setText(c.getName());
- }
-
+        Intent intent = new Intent(MainActivity.this,ReceiverParcel.class);
+        intent.putExtra("parcel", object);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_overview, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -46,15 +49,5 @@ public class Overview extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void addRitOnClick(View view) {
-        Intent intent = new Intent(this, AddRitActivity.class);
-        this.startActivity(intent);
-    }
-
-    public void historyOnClick(View view) {
-        Intent intent = new Intent(this, HistoryActivity.class);
-        this.startActivity(intent);
     }
 }

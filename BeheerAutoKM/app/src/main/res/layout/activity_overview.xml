@@ -29,6 +29,7 @@
         android:layout_centerHorizontal="true">
         <TableRow>
             <TextView
+                android:id="@+id/txtBouwjaar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bouwjaar"
@@ -68,6 +69,16 @@
                 android:textSize="20dp"/>
 
         </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/txt_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="testje"
+                android:textSize="20dp"/>
+        </TableRow>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

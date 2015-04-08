@@ -6,35 +6,32 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Manager implements Parcelable{
 
-    private ArrayList<Car> cars;
+    private int myInt = 0;
+    private List<Car> cars;
 
-    public Manager()
-    {
+    public Manager() {
         cars = new ArrayList<>();
-        cars.add(new Car("Kia Sportage", 2012, "XF-HJ-99"));
-        cars.add(new Car("Peugot 306", 2012, "AG-RT-46"));
     }
 
-    public Manager(Parcel in)
-    {
-        String[] data = new String[1];
-        in.readStringArray(data);
+    public List<Car> getCars(){
+        return this.cars;
+    }
+    public void setCars(List<Car> cars){this.cars = cars;}
+    public int getMyInt(){return this.myInt;}
+    public void setMyInt(int myInt){this.myInt = myInt;}
+
+    public Manager(Parcel in){
+        myInt = in.readInt();
+        in.readTypedList(cars, Car.CREATOR);
     }
 
     public boolean Login(Context c, String username, String password){
         if(username.equals("henk") && password.equals("hallo"))
         {
-            String[] carNamesStrings = new String[cars.size()];
-            for(int i = 0; i < cars.size(); i++)
-            {
-                carNamesStrings[i] = cars.get(i).getName();
-            }
-            Intent intent = new Intent(c, Overview.class);
-            intent.putExtra("items_to_parse", carNamesStrings);
-            c.startActivity(intent);
             return true;
         }
         else
@@ -49,7 +46,28 @@ public class Manager implements Parcelable{
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(Parcel outParcel, int flags) {
+        outParcel.writeInt(myInt);
+        outParcel.writeTypedList(cars);
+    }
 
+    public static final Parcelable.Creator<Manager> CREATOR
+            = new Parcelable.Creator<Manager>(){
+
+        @Override
+        public Manager createFromParcel(Parcel in) {
+            return new Manager(in);
+        }
+
+        @Override
+        public Manager[] newArray(int size) {
+            return new Manager[size];
+        }
+    };
+
+    public void addCar(Car car) {
+        if (car != null) {
+            this.cars.add(car);
+        }
     }
 }

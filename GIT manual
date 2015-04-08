@@ -1,0 +1,15 @@
+Stap 1. git add -A
+
+Voeg alle bestanden toe om te worden aangepast op de git.
+
+Stap 2. git commit -m "<commit message hier>"
+
+Geef een message aan je commit toe.
+
+Stap 3. git push
+
+Stuur de commit naar de git zodat de andere mensen hierbij kunnen.
+
+Stap x. git pull
+
+Haal alle nieuwe commits op.
