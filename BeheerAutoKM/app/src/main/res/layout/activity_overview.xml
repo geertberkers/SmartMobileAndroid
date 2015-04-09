@@ -32,7 +32,7 @@
                 android:id="@+id/txtBouwjaar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bouwjaar"
+                android:text="@string/year"
                 android:textSize="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -46,12 +46,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kilometerstand"
+                android:text="@string/KMStand"
                 android:textSize="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12.564"
+                android:text="@string/valueKM"
                 android:textSize="20dp"/>
 
         </TableRow>
@@ -60,12 +60,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kleur"
+                android:text="@string/color"
                 android:textSize="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Zilver"
+                android:text="@string/silver"
                 android:textSize="20dp"/>
 
         </TableRow>
@@ -75,21 +75,23 @@
                 android:id="@+id/txt_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="testje"
+                android:text="@string/test"
                 android:textSize="20dp"/>
         </TableRow>
 
         <Button
+            android:id="@+id/btnAddRit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nieuwe rit"
+            android:text="@string/newRit"
             android:textSize="20dp"
             android:onClick="addRitOnClick"/>
 
         <Button
+            android:id="@+id/btnHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Geschiedenis"
+            android:text="@string/history"
             android:textSize="20dp"
             android:onClick="historyOnClick"/>
         </TableLayout>
