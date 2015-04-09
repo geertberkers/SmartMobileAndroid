@@ -18,11 +18,11 @@ public class Overview extends ActionBarActivity {
         setContentView(R.layout.activity_overview);
 
         Bundle b = getIntent().getExtras();
-        Object object = b.getParcelable("parcel");
+        Manager object = b.getParcelable("parcel");
 
         TextView tv = (TextView) findViewById(R.id.txtBouwjaar);
-        //Car c = object.getCars().get(0);
-        //tv.setText(c.getName());
+        Car c = object.getCars().get(0);
+        tv.setText(c.getName());
  }
 
 
@@ -35,13 +35,11 @@ public class Overview extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            // Pressed on Settings menu
+            // TO DO: Implement code for settings
             return true;
         }
 
@@ -49,12 +47,16 @@ public class Overview extends ActionBarActivity {
     }
 
     public void addRitOnClick(View view) {
-        Intent intent = new Intent(this, AddRitActivity.class);
-        this.startActivity(intent);
+        if (view.getId() == R.id.btnAddRit) {
+            Intent intent = new Intent(this, AddRitActivity.class);
+            this.startActivity(intent);
+        }
     }
 
     public void historyOnClick(View view) {
-        Intent intent = new Intent(this, HistoryActivity.class);
-        this.startActivity(intent);
+        if (view.getId() == R.id.btnHistory) {
+            Intent intent = new Intent(this, HistoryActivity.class);
+            this.startActivity(intent);
+        }
     }
 }

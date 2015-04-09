@@ -21,6 +21,10 @@ public class ReceiverParcel extends ActionBarActivity {
         int t = object.getArrList().get(0).getTest();
         tv.setText(Integer.toString(t));
 
+        TextView tv2 = (TextView) findViewById(R.id.txt_receiver2);
+        int t2 = object.getArrList().get(1).getTest();
+        tv2.setText(Integer.toString(t2));
+
         System.out.println(object.getArrList().get(0).getTest());
         System.out.println(object.getMyInt());
     }

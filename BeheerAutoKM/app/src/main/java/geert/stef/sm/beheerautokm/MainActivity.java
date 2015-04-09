@@ -27,10 +27,11 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        carList.add(new Car("Peugot", 2001, "XH-FJ-99"));
-        carList.get(0).setName("Renault2");
+        carList.add(new Car("Peugeot", 2001, "XH-FJ-99"));
+        carList.get(0).setName("Renault");
 
         manager = new Manager();
+        // INTEGER TO TEST MANAGER
         manager.setMyInt(100);
         manager.setCars(carList);
 

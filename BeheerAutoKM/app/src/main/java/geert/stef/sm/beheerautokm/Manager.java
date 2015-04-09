@@ -14,7 +14,7 @@ public class Manager implements Parcelable{
     private List<Car> cars;
 
     public Manager() {
-        cars = new ArrayList<>();
+        cars = new ArrayList<Car>();
     }
 
     public List<Car> getCars(){
@@ -26,6 +26,7 @@ public class Manager implements Parcelable{
 
     public Manager(Parcel in){
         myInt = in.readInt();
+        cars = new ArrayList<Car>();
         in.readTypedList(cars, Car.CREATOR);
     }
 
@@ -48,11 +49,13 @@ public class Manager implements Parcelable{
     @Override
     public void writeToParcel(Parcel outParcel, int flags) {
         outParcel.writeInt(myInt);
+       // outParcel.writeArray(cars);
         outParcel.writeTypedList(cars);
     }
 
     public static final Parcelable.Creator<Manager> CREATOR
             = new Parcelable.Creator<Manager>(){
+
 
         @Override
         public Manager createFromParcel(Parcel in) {

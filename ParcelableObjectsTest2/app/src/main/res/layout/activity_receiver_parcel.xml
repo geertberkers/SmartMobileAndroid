@@ -10,4 +10,9 @@
         android:id="@+id/txt_receiver" android:text="receiver" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <TextView
+        android:id="@+id/txt_receiver2" android:text="receiver" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_receiver"/>
+
 </RelativeLayout>

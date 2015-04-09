@@ -18,7 +18,9 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         arrList.add(new MyListClass());
+        arrList.add(new MyListClass());
         arrList.get(0).setTest(200);
+        arrList.get(1).setTest(300);
 
         MyParcelable object = new MyParcelable();
         object.setMyInt(100);
