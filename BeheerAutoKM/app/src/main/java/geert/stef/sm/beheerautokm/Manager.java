@@ -14,7 +14,7 @@ public class Manager implements Parcelable{
     private List<Car> cars;
 
     public Manager() {
-        cars = new ArrayList<>();
+        cars = new ArrayList<Car>();
     }
 
     public List<Car> getCars(){

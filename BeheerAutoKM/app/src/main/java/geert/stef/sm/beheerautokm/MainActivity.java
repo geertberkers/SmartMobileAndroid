@@ -83,6 +83,7 @@ public class MainActivity extends ActionBarActivity {
         {
             Intent intent = new Intent(MainActivity.this, Overview.class);
             intent.putExtra("parcel", manager);
+            //intent.putParcelableArrayListExtra("parcel", manager.getCars());
             this.startActivity(intent);
             finish();
         }

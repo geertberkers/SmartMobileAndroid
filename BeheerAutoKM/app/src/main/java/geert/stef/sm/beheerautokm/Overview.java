@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class Overview extends ActionBarActivity {
+    Manager m;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +19,7 @@ public class Overview extends ActionBarActivity {
         setContentView(R.layout.activity_overview);
 
         Bundle b = getIntent().getExtras();
-        Object object = b.getParcelable("parcel");
+        Manager object = b.getParcelable("parcel");
 
         TextView tv = (TextView) findViewById(R.id.txtBouwjaar);
         //Car c = object.getCars().get(0);
