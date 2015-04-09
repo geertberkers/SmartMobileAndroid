@@ -28,7 +28,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         carList.add(new Car("Peugeot", 2001, "XH-FJ-99"));
-        carList.get(0).setName("Renault");
+        carList.add(new Car("Renault", 2001, "BL-AB-LA"));
+        carList.add(new Car("Kia", 2001, "JA-33-NE"));
 
         manager = new Manager();
         // INTEGER TO TEST MANAGER

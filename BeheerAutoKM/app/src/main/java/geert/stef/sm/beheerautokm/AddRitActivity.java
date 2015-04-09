@@ -4,18 +4,37 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 
 public class AddRitActivity extends ActionBarActivity {
 
+    Manager manager;
+    DatabaseConnector dc;
+    Spinner s;
+    String[] carSpinner;
+    EditText txtDistance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_rit);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_cars);
-        //ArrayAdapter<Car> ca
+        dc = new DatabaseConnector();
+
+        Bundle b = getIntent().getExtras();
+        manager = b.getParcelable("parcel");
+
+        txtDistance = (EditText) findViewById(R.id.txtDistance);
+        s = (Spinner) findViewById(R.id.spinner_cars);
+
+        String[] carSpinner = new String[manager.getCars().size()];
+        for(int i = 0; i < manager.getCars().size(); i++) {
+            carSpinner[i] = manager.getCars().get(i).getName();
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, carSpinner);
+        s.setAdapter(adapter);
     }
 
 
@@ -39,5 +58,20 @@ public class AddRitActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void addRit(){
+        String name = s.getSelectedItem().toString();
+        Car car = null;
+        for(Car c : manager.getCars())
+        {
+            if(c.getName().equals(name))
+            {
+                car = c;
+            }
+        }
+        Double distance = Double.valueOf(txtDistance.getText().toString());
+        //Car moet nog een ID hebben, dus moet ook met Parcelable geimplementeerd worden, 1 is testwaarde.
+        dc.addRit(distance, 1);
     }
 }

@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class Overview extends ActionBarActivity {
-    Manager m;
+    Manager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +19,10 @@ public class Overview extends ActionBarActivity {
         setContentView(R.layout.activity_overview);
 
         Bundle b = getIntent().getExtras();
-        Manager object = b.getParcelable("parcel");
+        manager = b.getParcelable("parcel");
 
         TextView tv = (TextView) findViewById(R.id.txtBouwjaar);
-        Car c = object.getCars().get(0);
+        Car c = manager.getCars().get(0);
         tv.setText(c.getName());
  }
 
@@ -50,6 +50,7 @@ public class Overview extends ActionBarActivity {
     public void addRitOnClick(View view) {
         if (view.getId() == R.id.btnAddRit) {
             Intent intent = new Intent(this, AddRitActivity.class);
+            intent.putExtra("parcel", manager);
             this.startActivity(intent);
         }
     }

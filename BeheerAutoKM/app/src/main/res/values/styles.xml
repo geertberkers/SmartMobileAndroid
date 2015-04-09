@@ -20,4 +20,9 @@
     <style name="twoButtonStyle" parent="textStyle">
         <item name = "android:layout_weight">0.5</item>
     </style>
+
+    <style name="centerStyle" parent="textFieldStyle">
+        <!--<item name ="android:layout_centerVertical">true</item> -->
+        <item name ="android:layout_centerHorizontal">true</item>
+    </style>
 </resources>
