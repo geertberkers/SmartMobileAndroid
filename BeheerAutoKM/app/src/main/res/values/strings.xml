@@ -13,5 +13,13 @@
     <string name="createAccount">Create account</string>
     <string name="username">Username</string>
     <string name="profile">Profile</string>
+    <string name="newRit">Nieuwe rit</string>
+    <string name="history">Geschiedenis</string>
+    <string name="test">testje</string>
+    <string name="silver">Zilver</string>
+    <string name="color">Kleur</string>
+    <string name="valueKM">12.564</string>
+    <string name="KMStand">Kilometerstand</string>
+    <string name="year">Bouwjaar</string>
 
 </resources>
