@@ -3,16 +3,21 @@ package geert.stef.sm.beheerautokm;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Car implements Parcelable {
     private String name;
     private int buildyear;
     private String licensePlate;
+    private List<Rit> ritten;
 
     public Car(String name, int buildyear, String licensePlate)
     {
         this.name = name;
         this.buildyear = buildyear;
         this.licensePlate = licensePlate;
+        ritten = new ArrayList<>();
     }
 
     public Car(Parcel read){

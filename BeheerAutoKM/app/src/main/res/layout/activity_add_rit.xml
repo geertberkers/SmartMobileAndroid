@@ -18,11 +18,20 @@
         android:inputType="phone"
         style="@style/textFieldStyle"/>
     <Button
+        android:id="@+id/btnAddRit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/addRit"
         android:layout_below="@+id/txtDistance"
         android:onClick="addRit"
+        style="@style/centerStyle"/>
+    <Button
+        android:id="@+id/btnGetRitten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get ritten"
+        android:layout_below="@id/btnAddRit"
+        android:onClick="getRitten"
         style="@style/centerStyle"/>
 
 </RelativeLayout>

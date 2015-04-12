@@ -21,6 +21,7 @@ public class MainActivity extends ActionBarActivity {
     TextView txtInfo;
 
     List<Car> carList = new ArrayList<>();
+    List<Rit> ritList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,9 @@ public class MainActivity extends ActionBarActivity {
         carList.add(new Car("Peugeot", 2001, "XH-FJ-99"));
         carList.add(new Car("Renault", 2001, "BL-AB-LA"));
         carList.add(new Car("Kia", 2001, "JA-33-NE"));
+
+        ritList.add(new Rit(1, 1, 12.12));
+        ritList.add(new Rit(1, 1, 12.12));
 
         manager = new Manager();
         // INTEGER TO TEST MANAGER
