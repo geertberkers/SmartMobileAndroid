@@ -31,7 +31,7 @@ public class AddRitActivity extends ActionBarActivity {
 
         String[] carSpinner = new String[manager.getCars().size()];
         for(int i = 0; i < manager.getCars().size(); i++) {
-            carSpinner[i] = manager.getCars().get(i).getName();
+            carSpinner[i] = manager.getCars().get(i).getCar();
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, carSpinner);
         s.setAdapter(adapter);
@@ -65,7 +65,7 @@ public class AddRitActivity extends ActionBarActivity {
         Car car = null;
         for(Car c : manager.getCars())
         {
-            if(c.getName().equals(name))
+            if(c.getCar().equals(name))
             {
                 car = c;
             }

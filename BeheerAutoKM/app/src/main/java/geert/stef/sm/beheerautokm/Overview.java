@@ -23,7 +23,7 @@ public class Overview extends ActionBarActivity {
 
         TextView tv = (TextView) findViewById(R.id.txtBouwjaar);
         Car c = manager.getCars().get(0);
-        tv.setText(c.getName());
+        tv.setText(c.getCar());
  }
 
 

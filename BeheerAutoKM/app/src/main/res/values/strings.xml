@@ -8,10 +8,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_add_rit">AddRitActivity</string>
     <string name="title_activity_history">HistoryActivity</string>
-    <string name="password">hallo</string> <!-- Username -->
+    <string name="password">Pasword</string> <!-- Username -->
     <string name="login">Log in!</string>
     <string name="createAccount">Create account</string>
-    <string name="username">henk</string> <!-- Username -->
+    <string name="username">Username</string>
     <string name="profile">Profile</string>
     <string name="newRit">Nieuwe rit</string>
     <string name="history">Geschiedenis</string>

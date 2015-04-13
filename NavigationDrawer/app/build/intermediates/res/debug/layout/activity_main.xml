@@ -8,7 +8,8 @@
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+    </FrameLayout>
     
     <!-- The navigation drawer -->
     <ListView
@@ -20,6 +21,13 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="left" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Add a Car"
+        android:id="@+id/button"
+        android:layout_gravity="left"/>
     
     <!-- The navigation drawer 
     <LinearLayout

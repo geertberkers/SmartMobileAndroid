@@ -3,22 +3,35 @@ package geert.stef.sm.beheerautokm;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Car implements Parcelable {
-    private String name;
-    private int buildyear;
-    private String licensePlate;
+import java.math.BigDecimal;
 
-    public Car(String name, int buildyear, String licensePlate)
-    {
-        this.name = name;
-        this.buildyear = buildyear;
+public class Car implements Parcelable {
+    private String car;
+    private int year;
+    private String fuel;
+    private int horsepower;
+    private double mileage;
+    private String licensePlate;
+    private Driver owner;
+
+    public Car(String name, int year, String fuel, int horsepower, double mileage, String licensePlate, Driver owner){
+        this.car = name;
+        this.year = year;
+        this.fuel = fuel;
+        this.horsepower = horsepower;
+        this.mileage = mileage;
         this.licensePlate = licensePlate;
+        this.owner = owner;
     }
 
     public Car(Parcel read){
-        this.name = read.readString();
-        this.buildyear = read.readInt();
+        this.car = read.readString();
+        this.year = read.readInt();
+        this.fuel = read.readString();
+        this.horsepower = read.readInt();
+        this.mileage = read.readDouble();
         this.licensePlate = read.readString();
+        this.owner = new Driver(read.readString(),read.readString(),read.readString());
     }
 
     public static final Parcelable.Creator<Car> CREATOR =
@@ -42,16 +55,72 @@ public class Car implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel arg0, int arg1) {
-        arg0.writeString(name);
-        arg0.writeInt(buildyear);
+        arg0.writeString(car);
+        arg0.writeInt(year);
+        arg0.writeString(fuel);
+        arg0.writeInt(horsepower);
+        arg0.writeDouble(mileage);
         arg0.writeString(licensePlate);
+        arg0.writeString(owner.getUsername());
+        arg0.writeString(owner.getPassword());
+        arg0.writeString(owner.getName());
+
+    //    arg0.writeString(owner);
     }
 
-    public void setName(String name){
-        this.name = name;
+    public String getCar() {
+        return car;
     }
 
-    public String getName(){
-        return this.name;
+    public void setCar(String car) {
+        this.car = car;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(String fuel) {
+        this.fuel = fuel;
+    }
+
+    public int getHorsepower() {
+        return horsepower;
+    }
+
+    public void setHorsepower(int horsepower) {
+        this.horsepower = horsepower;
+    }
+
+    public double getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(double mileage) {
+        this.mileage = mileage;
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
+    public Driver getOwner() {
+        return owner;
+    }
+
+    public void getOwner(Driver owner) {
+        this.owner = owner;
     }
 }

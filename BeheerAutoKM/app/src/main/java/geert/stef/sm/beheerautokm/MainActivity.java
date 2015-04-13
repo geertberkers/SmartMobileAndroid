@@ -1,15 +1,18 @@
 package geert.stef.sm.beheerautokm;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,22 +22,29 @@ public class MainActivity extends ActionBarActivity {
     EditText txtUsername;
     EditText txtPassword;
     TextView txtInfo;
+    String popupName;
 
     List<Car> carList = new ArrayList<>();
+    List<Driver> driverList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        carList.add(new Car("Peugeot", 2001, "XH-FJ-99"));
-        carList.add(new Car("Renault", 2001, "BL-AB-LA"));
-        carList.add(new Car("Kia", 2001, "JA-33-NE"));
+        driverList.add(new Driver("geert","g","Geert Berkers"));
+        driverList.add(new Driver("stef","s","Stef Phillipsen"));
+        driverList.add(new Driver("koen","k","Koen Meeuws"));
+
+        carList.add(new Car("Peugeot", 2001, "Benzine", 90 ,185000, "XH-FJ-99", driverList.get(0)));
+        carList.add(new Car("Opel", 2008, "Diesel", 122, 54500, "BL-AB-LA", driverList.get(1)));
+        carList.add(new Car("BMW", 2014, "LPG", 147, 10000.5, "JA-33-NE", driverList.get(2)));
 
         manager = new Manager();
         // INTEGER TO TEST MANAGER
         manager.setMyInt(100);
         manager.setCars(carList);
+        manager.setDrivers(driverList);
 
         txtInfo = (TextView)findViewById(R.id.txtInfo);
         txtUsername = (EditText)findViewById(R.id.txtUsername);
@@ -61,7 +71,6 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -80,21 +89,42 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void logIn(View view) {
+        logIn();
+    }
+
+    public void logIn() {
         boolean loggedIn = manager.Login(this, txtUsername.getText().toString(), txtPassword.getText().toString());
         if(loggedIn)
         {
             Intent intent = new Intent(MainActivity.this, Overview.class);
             intent.putExtra("parcel", manager);
-            //intent.putParcelableArrayListExtra("parcel", manager.getCars());
             this.startActivity(intent);
             finish();
         }
         else {
             txtInfo.setText(R.string.logInFailed);
         }
-
     }
 
     public void createAccount(View view) {
+        final EditText input = new EditText(this);
+        new AlertDialog.Builder(this)
+                .setTitle("Set name:")
+                .setMessage("Name of the driver:")
+                .setView(input)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        popupName = input.getText().toString();
+                        manager.Register(getApplicationContext(), txtUsername.getText().toString(), txtPassword.getText().toString(), popupName);
+                        if(manager.Login(getApplicationContext(),txtUsername.getText().toString(), txtPassword.getText().toString())) {
+                            logIn();
+                        }
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                }).show();
+
     }
 }
