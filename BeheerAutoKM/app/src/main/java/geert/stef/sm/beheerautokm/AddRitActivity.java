@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 
@@ -43,7 +44,7 @@ public class AddRitActivity extends ActionBarActivity {
         for(int i = 0; i < manager.getCars().size(); i++) {
             carSpinner[i] = manager.getCars().get(i).getCar();
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, carSpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, carSpinner);
         s.setAdapter(adapter);
     }
 
@@ -181,9 +182,17 @@ public class AddRitActivity extends ActionBarActivity {
                     int ritID = oneObject.getInt("RitID");
                     int carID = oneObject.getInt("CarID");
                     double distance = oneObject.getDouble("Distance");
+
+                    int year = Integer.parseInt(oneObject.getString("Datum").substring(0,4));
+                    int month = Integer.parseInt(oneObject.getString("Datum").substring(5,7));
+                    int day = Integer.parseInt(oneObject.getString("Datum").substring(8,10));
+
+                    Date date = new Date(year,month, day);
+                    System.out.println(date.toString());
                     ritten.add(new Rit(ritID, carID, distance));
                 } catch (JSONException e) {
                     // Oops
+
                 }
             }
         } catch (JSONException e) {

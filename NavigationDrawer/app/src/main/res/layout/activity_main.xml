@@ -21,22 +21,5 @@
         android:layout_height="match_parent"
         android:layout_gravity="left" />
     
-    <!-- The navigation drawer 
-    <LinearLayout
-        android:id="@+id/drawer"
-        android:layout_width="240dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="start" >
- 
-        <ListView android:id="@+id/drawer_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:choiceMode="singleChoice"
-            android:divider="@android:color/darker_gray"
-            android:dividerHeight="0.1dp"
-            android:textColor="@android:color/white"
-            android:background="#fff" />
- 
-    </LinearLayout>-->
+
 </android.support.v4.widget.DrawerLayout>

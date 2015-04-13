@@ -335,10 +335,11 @@ int drawable abc_textfield_search_activated_mtrl_alpha 0x7f020030
 int drawable abc_textfield_search_default_mtrl_alpha 0x7f020031
 int drawable abc_textfield_search_material 0x7f020032
 int drawable bugatti 0x7f020033
-int drawable ic_launcher 0x7f020034
-int drawable peugeot 0x7f020035
-int drawable plus 0x7f020036
-int drawable polo 0x7f020037
+int drawable favorite 0x7f020034
+int drawable ic_launcher 0x7f020035
+int drawable peugeot 0x7f020036
+int drawable plus 0x7f020037
+int drawable polo 0x7f020038
 int id action_bar 0x7f090031
 int id action_bar_activity_content 0x7f090000
 int id action_bar_container 0x7f090030
@@ -356,7 +357,6 @@ int id action_settings 0x7f090045
 int id activity_chooser_view_content 0x7f090021
 int id always 0x7f090016
 int id beginning 0x7f090013
-int id button 0x7f090042
 int id checkbox 0x7f090029
 int id collapseActionView 0x7f090017
 int id content_frame 0x7f090040
@@ -371,6 +371,7 @@ int id edit_query 0x7f090033
 int id end 0x7f090014
 int id expand_activities_button 0x7f090022
 int id expanded_menu 0x7f090028
+int id favoriteCar 0x7f090044
 int id home 0x7f090004
 int id homeAsUp 0x7f09000d
 int id icon 0x7f090026
@@ -378,8 +379,8 @@ int id ifRoom 0x7f090018
 int id image 0x7f090023
 int id listMode 0x7f090009
 int id list_item 0x7f090025
-int id menuItem 0x7f090044
-int id menuPicture 0x7f090043
+int id menuItem 0x7f090043
+int id menuPicture 0x7f090042
 int id middle 0x7f090015
 int id never 0x7f090019
 int id none 0x7f09000e
@@ -457,8 +458,9 @@ int string action_settings 0x7f0b0010
 int string app_name 0x7f0b0011
 int string drawer_close 0x7f0b0012
 int string drawer_open 0x7f0b0013
-int string hello_world 0x7f0b0014
-int string menu_picture 0x7f0b0015
+int string favoriteCar 0x7f0b0014
+int string hello_world 0x7f0b0015
+int string menu_picture 0x7f0b0016
 int style AppBaseTheme 0x7f0c0000
 int style AppTheme 0x7f0c0001
 int style Base_TextAppearance_AppCompat 0x7f0c0002

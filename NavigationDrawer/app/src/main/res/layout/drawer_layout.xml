@@ -5,8 +5,8 @@
 
     <ImageView
         android:id="@+id/menuPicture"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/menu_picture"
@@ -23,5 +23,17 @@
         android:layout_toRightOf="@id/menuPicture"
         android:textColor="#FF000000"
         android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/favoriteCar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/favoriteCar"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp" />
 
 </RelativeLayout>

@@ -83,6 +83,7 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
     			selectedCar = c;
     	    	setTitle(c.getCarName());
     	    	setIcon(c.getImage());
+                drawerLayout.closeDrawer(listView);
     		}
     	}
     	

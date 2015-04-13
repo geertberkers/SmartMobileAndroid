@@ -71,9 +71,11 @@ public class MyAdapter extends BaseAdapter {
         }
         TextView titleMenuItem = (TextView) row.findViewById(R.id.menuItem);
         ImageView titleImageView = (ImageView) row.findViewById(R.id.menuPicture);
+        ImageView favoriteImageView = (ImageView) row.findViewById(R.id.favoriteCar);
 
         titleMenuItem.setText(carList.get(position).getCarName());
         titleImageView.setImageResource(carList.get(position).getImage());
+        if(carList.get(position).isFavorite()) { favoriteImageView.setImageResource(R.drawable.favorite);}
 
         return row;
     }

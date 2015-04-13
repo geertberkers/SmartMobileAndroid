@@ -173,6 +173,7 @@
     <string name="app_name">NavigationDrawer</string>
     <string name="drawer_close">Close Navigation Drawer</string>
     <string name="drawer_open">Open Navigation Drawer</string>
+    <string name="favoriteCar">favoriteCar</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_picture">Menu Picture</string>
     <!-- From: file:/C:/Android/SmartMobileAndroid/NavigationDrawer/app/src/main/res/values/styles.xml -->

@@ -8,7 +8,8 @@
     
     <string name="drawer_open">Open Navigation Drawer</string>
     <string name="drawer_close">Close Navigation Drawer</string>
-    
+    <string name="favoriteCar">favoriteCar</string>
+
     <string-array name="cars">
         <item >Peugeot 206</item>
         <item >Volkswagen Polo</item>
