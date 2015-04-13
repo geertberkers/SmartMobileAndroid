@@ -25,7 +25,11 @@ public class MainActivity extends ActionBarActivity {
     String popupName;
 
     List<Car> carList = new ArrayList<>();
+<<<<<<< HEAD
     List<Driver> driverList = new ArrayList<>();
+=======
+    List<Rit> ritList = new ArrayList<>();
+>>>>>>> origin/master
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,9 @@ public class MainActivity extends ActionBarActivity {
         carList.add(new Car("Peugeot", 2001, "Benzine", 90 ,185000, "XH-FJ-99", driverList.get(0)));
         carList.add(new Car("Opel", 2008, "Diesel", 122, 54500, "BL-AB-LA", driverList.get(1)));
         carList.add(new Car("BMW", 2014, "LPG", 147, 10000.5, "JA-33-NE", driverList.get(2)));
+
+        ritList.add(new Rit(1, 1, 12.12));
+        ritList.add(new Rit(1, 1, 12.12));
 
         manager = new Manager();
         // INTEGER TO TEST MANAGER

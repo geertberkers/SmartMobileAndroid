@@ -1,8 +1,6 @@
 package geert.stef.sm.beheerautokm;
 
 import android.content.Intent;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;

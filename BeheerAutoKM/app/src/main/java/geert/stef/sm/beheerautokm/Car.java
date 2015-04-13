@@ -3,7 +3,12 @@ package geert.stef.sm.beheerautokm;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+<<<<<<< HEAD
 import java.math.BigDecimal;
+=======
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> origin/master
 
 public class Car implements Parcelable {
     private String car;
@@ -12,7 +17,11 @@ public class Car implements Parcelable {
     private int horsepower;
     private double mileage;
     private String licensePlate;
+<<<<<<< HEAD
     private Driver owner;
+=======
+    private List<Rit> ritten;
+>>>>>>> origin/master
 
     public Car(String name, int year, String fuel, int horsepower, double mileage, String licensePlate, Driver owner){
         this.car = name;
@@ -21,7 +30,11 @@ public class Car implements Parcelable {
         this.horsepower = horsepower;
         this.mileage = mileage;
         this.licensePlate = licensePlate;
+<<<<<<< HEAD
         this.owner = owner;
+=======
+        ritten = new ArrayList<>();
+>>>>>>> origin/master
     }
 
     public Car(Parcel read){

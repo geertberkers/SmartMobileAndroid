@@ -1,14 +1,21 @@
 package geert.stef.sm.beheerautokm;
 
+import java.util.Date;
+
 /**
  * Created by Stef on 9-4-2015.
  */
 public class Rit {
-    double distance;
 
-    //Komt nog meer info bij(denk ik)
-    public Rit(double distance)
-    {
+    int ritID;
+    int carID;
+    double distance;
+    String driver;
+    Date date;
+
+    public Rit(int ritID, int carID, double distance) {
+        this.ritID = ritID;
+        this.carID = carID;
         this.distance = distance;
     }
 }
