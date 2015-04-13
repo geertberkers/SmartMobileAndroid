@@ -39,13 +39,9 @@ public class AddRitActivity extends ActionBarActivity {
         s = (Spinner) findViewById(R.id.spinner_cars);
 
         String[] carSpinner = new String[manager.getCars().size()];
-<<<<<<< HEAD
+
         for(int i = 0; i < manager.getCars().size(); i++) {
             carSpinner[i] = manager.getCars().get(i).getCar();
-=======
-        for (int i = 0; i < manager.getCars().size(); i++) {
-            carSpinner[i] = manager.getCars().get(i).getName();
->>>>>>> origin/master
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, carSpinner);
         s.setAdapter(adapter);
@@ -77,18 +73,15 @@ public class AddRitActivity extends ActionBarActivity {
     public void addRit(View view) {
         String name = s.getSelectedItem().toString();
         Car car = null;
-<<<<<<< HEAD
+
         for(Car c : manager.getCars())
         {
             if(c.getCar().equals(name))
             {
-=======
-        for (Car c : manager.getCars()) {
-            if (c.getName().equals(name)) {
->>>>>>> origin/master
                 car = c;
             }
         }
+
         Double distance = 0.00;
         try {
             if (tryParseDouble(txtDistance.getText().toString())) {

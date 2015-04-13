@@ -21,9 +21,9 @@ public class AddRitTask extends AsyncTask {
         return null;
     }
 
-    public void addRit(double distance, int carid, int driver) {
+    public void addRit(double distance, int carID, int driver) {
         String url = "http://stefp.nl/addRit.php";
-        String p1 = "?carid=" + carid;
+        String p1 = "?carid=" + carID;
         String p2 = "&distance=" + distance;
         String p3 = "&driver=1" + driver;
         this.hitUrl(url + p1 + p2);

@@ -2,13 +2,9 @@ package geert.stef.sm.beheerautokm;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-<<<<<<< HEAD
-import java.math.BigDecimal;
-=======
 import java.util.ArrayList;
 import java.util.List;
->>>>>>> origin/master
+
 
 public class Car implements Parcelable {
     private String car;
@@ -17,11 +13,8 @@ public class Car implements Parcelable {
     private int horsepower;
     private double mileage;
     private String licensePlate;
-<<<<<<< HEAD
     private Driver owner;
-=======
     private List<Rit> ritten;
->>>>>>> origin/master
 
     public Car(String name, int year, String fuel, int horsepower, double mileage, String licensePlate, Driver owner){
         this.car = name;
@@ -29,12 +22,8 @@ public class Car implements Parcelable {
         this.fuel = fuel;
         this.horsepower = horsepower;
         this.mileage = mileage;
-        this.licensePlate = licensePlate;
-<<<<<<< HEAD
         this.owner = owner;
-=======
         ritten = new ArrayList<>();
->>>>>>> origin/master
     }
 
     public Car(Parcel read){
@@ -45,6 +34,8 @@ public class Car implements Parcelable {
         this.mileage = read.readDouble();
         this.licensePlate = read.readString();
         this.owner = new Driver(read.readString(),read.readString(),read.readString());
+        ritten = new ArrayList<>();
+        read.readTypedList(ritten, Rit.CREATOR);
     }
 
     public static final Parcelable.Creator<Car> CREATOR =
@@ -77,6 +68,7 @@ public class Car implements Parcelable {
         arg0.writeString(owner.getUsername());
         arg0.writeString(owner.getPassword());
         arg0.writeString(owner.getName());
+        arg0.writeTypedList(ritten);
 
     //    arg0.writeString(owner);
     }

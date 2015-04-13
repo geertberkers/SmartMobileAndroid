@@ -3,10 +3,8 @@ package geert.stef.sm.beheerautokm;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -25,11 +23,8 @@ public class MainActivity extends ActionBarActivity {
     String popupName;
 
     List<Car> carList = new ArrayList<>();
-<<<<<<< HEAD
     List<Driver> driverList = new ArrayList<>();
-=======
     List<Rit> ritList = new ArrayList<>();
->>>>>>> origin/master
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +69,6 @@ public class MainActivity extends ActionBarActivity {
                     txtPassword.setText("");
                 }
             }
-
         });
     }
 
