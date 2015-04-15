@@ -10,11 +10,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- The main content view -->
+    <!-- The main content view
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"-->
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -23,18 +23,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BMW 4-series"
-                android:textSize="40dp"
-                android:id="@+id/name"
+                android:text="@string/car"
+                android:textSize="40sp"
+                android:id="@+id/txtCar"
                 android:layout_centerHorizontal="true" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:src="@drawable/bmw"
-                android:layout_alignParentTop="true"
+                android:layout_width="fill_parent"
+                android:layout_height="250dp"
+                android:layout_below="@+id/txtCar"
+                android:src="@drawable/polo"
+                android:contentDescription="@string/selectedCar"
                 android:layout_centerHorizontal="true"
+                android:scaleType="centerCrop"
                 android:id="@+id/carPhoto" />
 
             <TableLayout
@@ -46,68 +47,128 @@
                 <TableRow>
 
                     <TextView
-                        android:id="@+id/txtBouwjaar"
+                        android:id="@+id/txtYear"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/year"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/txtYearValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2013"
-                        android:textSize="20dp" />
+                        android:text="@string/yearValue"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/txtFuel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/KMStand"
-                        android:textSize="20dp" />
+                        android:text="@string/fuel"
+                        android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/txtFuelValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/valueKM"
-                        android:textSize="20dp" />
+                        android:text="@string/fuelValue"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/txtHP"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/color"
-                        android:textSize="20dp" />
+                        android:text="@string/HP"
+                        android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/txtHPValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/silver"
-                        android:textSize="20dp" />
+                        android:text="@string/HPValue"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
                 <TableRow>
 
                     <TextView
-                        android:id="@+id/txt_test"
+                        android:id="@+id/txtMileage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/test"
-                        android:textSize="20dp" />
+                        android:text="@string/mileage"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/txtMileageValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mileageValue"
+                        android:textSize="20sp" />
+
                 </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/txtLicenseplate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/licenseplate"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/txtLicenseplateValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/licenseplateValue"
+                        android:textSize="20sp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/txtOwner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/owner"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/txtOwnerValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ownerValue"
+                        android:textSize="20sp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/favCar"
+                        android:id="@+id/cbFavorite"
+                        android:onClick="setAsFavorite" />
+                </TableRow>
+
 
                 <Button
                     android:id="@+id/btnAddRit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/newRit"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:onClick="addRitOnClick" />
 
                 <Button
@@ -115,36 +176,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/history"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:onClick="historyOnClick" />
             </TableLayout>
         </RelativeLayout>
-    </FrameLayout>
+    <!--</FrameLayout>-->
 
     <!-- The navigation drawer -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_gravity="left"
-        android:background="#0000A0">
-
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Car"
-            android:id="@+id/btnAddCar"
-            android:onClick="addCar"/>
+        android:layout_gravity="start"
+        android:background="#0000A0"
+        android:id="@+id/DrawerLinear">
 
         <ListView
             android:id="@+id/drawerList"
             android:divider="@android:color/darker_gray"
             android:dividerHeight="1dp"
             android:layout_width="240dp"
-            android:layout_height="match_parent"/>
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/addCar"
+            android:id="@+id/btnAddCar"
+            android:onClick="addCar"/>
+
+    </LinearLayout>
 
 
 

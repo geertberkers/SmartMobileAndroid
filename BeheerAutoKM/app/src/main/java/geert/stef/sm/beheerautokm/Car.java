@@ -25,6 +25,7 @@ public class Car implements Parcelable {
         this.fuel = fuel;
         this.horsepower = horsepower;
         this.mileage = mileage;
+        this.licensePlate = licensePlate;
         this.owner = owner;
         this.favorite = false;
         ritten = new ArrayList<>();

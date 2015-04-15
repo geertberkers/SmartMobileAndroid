@@ -30,19 +30,11 @@ public class MyAdapter extends BaseAdapter {
         return carList;
     }
 
-    public void setCarList(){ this.carList = carList;}
+    public void  setCarList(List<Car> carList){ this.carList = carList; notifyDataSetChanged();}
 
     public MyAdapter(Context context, List<Car> carList){
         this.context = context;
         this.carList = carList;
-/*
-        cars = context.getResources().getStringArray(R.array.cars);
-
-        for(int i = 0; i<cars.length;i++)
-        {
-            carList.add(new Car(cars[i],images[i]));
-        }
-        */
     }
 
     @Override
@@ -78,7 +70,7 @@ public class MyAdapter extends BaseAdapter {
 
         titleMenuItem.setText(carList.get(position).getCar());
         titleImageView.setImageResource(carList.get(position).getImage());
-        if(carList.get(position).isFavorite()) { favoriteImageView.setImageResource(R.drawable.favorite);}
+        if(carList.get(position).isFavorite()) { favoriteImageView.setImageResource(R.drawable.favorite);} else { favoriteImageView.setImageResource(0);}
 
         return row;
     }
