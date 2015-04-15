@@ -32,12 +32,12 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         driverList.add(new Driver("geert","g","Geert Berkers"));
-        driverList.add(new Driver("stef","s","Stef Phillipsen"));
+        driverList.add(new Driver("stef","s","Stef Philipsen"));
         driverList.add(new Driver("koen","k","Koen Meeuws"));
 
-        carList.add(new Car("Peugeot", 2001, "Benzine", 90 ,185000, "XH-FJ-99", driverList.get(0)));
-        carList.add(new Car("Opel", 2008, "Diesel", 122, 54500, "BL-AB-LA", driverList.get(1)));
-        carList.add(new Car("BMW", 2014, "LPG", 147, 10000.5, "JA-33-NE", driverList.get(2)));
+        carList.add(new Car("Peugeot", R.drawable.peugeot, 2001, "Benzine", 90 ,185000, "XH-FJ-99", driverList.get(0)));
+        carList.add(new Car("Volkswagen Polo", R.drawable.polo, 2008, "Diesel", 122, 54500, "BL-AB-LA", driverList.get(1)));
+        carList.add(new Car("Bugatti Veyron SS", R.drawable.bugatti, 2014, "LPG", 147, 10000.5, "JA-33-NE", driverList.get(2)));
 
         ritList.add(new Rit(1, 1, 12.12));
         ritList.add(new Rit(1, 1, 12.12));
