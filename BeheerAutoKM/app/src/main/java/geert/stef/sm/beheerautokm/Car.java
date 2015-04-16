@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Car implements Parcelable {
     private String car;
+    private CarBrand brand;
     private int image;
     private int year;
     private String fuel;
@@ -18,8 +19,9 @@ public class Car implements Parcelable {
     private boolean favorite;
     private List<Rit> ritten;
 
-    public Car(String name,int image, int year, String fuel, int horsepower, double mileage, String licensePlate, Driver owner){
+    public Car(String name,CarBrand brand, int image, int year, String fuel, int horsepower, double mileage, String licensePlate, Driver owner){
         this.car = name;
+        this.brand = brand;
         this.image = image;
         this.year = year;
         this.fuel = fuel;
@@ -33,6 +35,13 @@ public class Car implements Parcelable {
 
     public Car(Parcel read){
         this.car = read.readString();
+        String carBrand = read.readString();
+        for(CarBrand cb : CarBrand.values())
+        {
+            if(cb.toString().equals(carBrand)){
+                this.brand = cb;
+            }
+        }
         this.image = read.readInt();
         this.year = read.readInt();
         this.fuel = read.readString();
@@ -67,6 +76,12 @@ public class Car implements Parcelable {
     @Override
     public void writeToParcel(Parcel arg0, int arg1) {
         arg0.writeString(car);
+        for(CarBrand cb : CarBrand.values())
+        {
+            if(cb.toString().equals(brand.toString())){
+                arg0.writeString(brand.toString());
+            }
+        }
         arg0.writeInt(image);
         arg0.writeInt(year);
         arg0.writeString(fuel);
@@ -149,4 +164,12 @@ public class Car implements Parcelable {
     public boolean isFavorite() { return favorite; }
 
     public void setFavorite(boolean favorite) { this.favorite = favorite; }
+
+    public CarBrand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(CarBrand brand) {
+        this.brand = brand;
+    }
 }

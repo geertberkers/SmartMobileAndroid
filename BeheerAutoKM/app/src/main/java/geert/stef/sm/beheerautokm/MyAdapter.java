@@ -16,20 +16,10 @@ import java.util.List;
 public class MyAdapter extends BaseAdapter {
     private Context context;
 
-    private String[] cars;
-    private Integer[] images ={R.drawable.peugeot, R.drawable.polo, R.drawable.bugatti, R.drawable.plus};
-
     private List<Car> carList = new ArrayList<>();
-
-    public void addCar(Car car){
-        carList.add(carList.size()-1, car);
-        notifyDataSetChanged();
-    }
-
     public List<Car> getCarList(){
         return carList;
     }
-
     public void  setCarList(List<Car> carList){ this.carList = carList; notifyDataSetChanged();}
 
     public MyAdapter(Context context, List<Car> carList){
@@ -69,7 +59,21 @@ public class MyAdapter extends BaseAdapter {
         ImageView favoriteImageView = (ImageView) row.findViewById(R.id.favoriteCar);
 
         titleMenuItem.setText(carList.get(position).getCar());
-        titleImageView.setImageResource(carList.get(position).getImage());
+
+
+        for(CarBrand cb : CarBrand.values())
+        {
+            if(carList.get(position).getBrand().toString().equals(cb.toString())){
+                switch (cb.toInt()){
+                    case 0:titleImageView.setImageResource(R.mipmap.audi); break;
+                    case 1:titleImageView.setImageResource(R.mipmap.bmw); break;
+                    case 2:titleImageView.setImageResource(R.mipmap.opel); break;
+                    case 3:titleImageView.setImageResource(R.mipmap.peugeot); break;
+                    case 4:titleImageView.setImageResource(R.mipmap.vw); break;
+                }
+            }
+        }
+
         if(carList.get(position).isFavorite()) { favoriteImageView.setImageResource(R.drawable.favorite);} else { favoriteImageView.setImageResource(0);}
 
         return row;
