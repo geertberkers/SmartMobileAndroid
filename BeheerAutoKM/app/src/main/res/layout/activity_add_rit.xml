@@ -35,4 +35,15 @@
         android:onClick="getRitten"
         style="@style/centerStyle"/>
 
+    <Button
+        android:id="@+id/btnTrackRit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/track"
+        android:layout_below="@id/btnGetRitten"
+        android:onClick="trackLocation"
+        style="@style/centerStyle"/>
+
+
+
 </RelativeLayout>

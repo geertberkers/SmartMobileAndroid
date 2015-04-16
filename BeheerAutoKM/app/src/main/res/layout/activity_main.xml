@@ -31,7 +31,7 @@
         android:layout_below="@+id/txtInfo"
         android:layout_centerHorizontal="true"
         android:singleLine="true"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:text="@string/username" />
 
     <EditText

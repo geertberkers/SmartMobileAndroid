@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public class Car implements Parcelable {
-    private String car;
+    private String name;
     private CarBrand brand;
     private int image;
     private int year;
@@ -21,8 +21,8 @@ public class Car implements Parcelable {
     private List<Rit> ritten;
     private Bitmap localImage;
 
-    public Car(String name,CarBrand brand, int image, int year, String fuel, int horsepower, double mileage, String licensePlate, Driver owner){
-        this.car = name;
+    public Car(String name,CarBrand brand,  int image, int year, String fuel, int horsepower, double mileage, String licensePlate, Driver owner){
+        this.name = name;
         this.brand = brand;
         this.image = image;
         this.year = year;
@@ -36,7 +36,7 @@ public class Car implements Parcelable {
     }
 
     public Car(Parcel read){
-        this.car = read.readString();
+        this.name = read.readString();
         String carBrand = read.readString();
         for(CarBrand cb : CarBrand.values())
         {
@@ -77,7 +77,7 @@ public class Car implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel arg0, int arg1) {
-        arg0.writeString(car);
+        arg0.writeString(name);
         for(CarBrand cb : CarBrand.values())
         {
             if(cb.toString().equals(brand.toString())){
@@ -99,17 +99,13 @@ public class Car implements Parcelable {
     //    arg0.writeString(owner);
     }
 
-    public String getCar() {
-        return car;
+    public String getCar() {return name; }
+
+    public void setCar(String name) {
+        this.name = name;
     }
 
-    public void setCar(String car) {
-        this.car = car;
-    }
-
-    public int getYear() {
-        return year;
-    }
+    public int getYear() {return year; }
 
     public void setYear(int year) {
         this.year = year;
@@ -160,7 +156,7 @@ public class Car implements Parcelable {
     }
     @Override
     public String toString() {
-        return car;
+        return name;
     }
 
     public boolean isFavorite() { return favorite; }

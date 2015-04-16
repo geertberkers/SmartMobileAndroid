@@ -39,6 +39,8 @@
     <string name="favCar">Favorite Car</string>
     <string name="addCar">Add Car</string>
     <string name="selectedCar">Selected Car</string>
+    <string name="title_activity_location">LocationActivity</string>
+    <string name="track">Track location</string>
     <string name="otherImage">Add other image</string>
     <string name="rememberMe">Remember me</string>
     <string name="logo">Logo</string>

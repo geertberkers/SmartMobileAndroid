@@ -2,6 +2,7 @@ package geert.stef.sm.beheerautokm;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -180,8 +181,9 @@ public class AddRitActivity extends ActionBarActivity {
                     JSONObject oneObject = jArray.getJSONObject(i);
                     // Pulling items from the array
                     int ritID = oneObject.getInt("RitID");
-                    int carID = oneObject.getInt("CarID");
+                    String car = oneObject.getString("Car");
                     double distance = oneObject.getDouble("Distance");
+                    String driver = oneObject.getString("Driver");
 
                     int year = Integer.parseInt(oneObject.getString("Datum").substring(0,4));
                     int month = Integer.parseInt(oneObject.getString("Datum").substring(5,7));
@@ -189,7 +191,7 @@ public class AddRitActivity extends ActionBarActivity {
 
                     Date date = new Date(year,month, day);
                     System.out.println(date.toString());
-                    ritten.add(new Rit(ritID, carID, distance));
+                    ritten.add(new Rit(ritID, car, distance, driver));
                 } catch (JSONException e) {
                     // Oops
 
@@ -198,5 +200,11 @@ public class AddRitActivity extends ActionBarActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void trackLocation(View view) {
+        Intent intent = new Intent(this, LocationActivity.class);
+        this.startActivity(intent);
+        finish();
     }
 }
