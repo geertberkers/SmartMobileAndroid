@@ -1,8 +1,10 @@
 package geert.stef.sm.beheerautokm;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -10,11 +12,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -23,7 +26,9 @@ public class MainActivity extends ActionBarActivity {
     EditText txtPassword;
     TextView txtInfo;
     String popupName;
+    CheckBox cbRemember;
 
+    SharedPreferences sharedPref;
     List<Car> carList = new ArrayList<>();
     List<Driver> driverList = new ArrayList<>();
     List<Rit> ritList = new ArrayList<>();
@@ -33,12 +38,30 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        driverList.add(new Driver("geert","g","Geert Berkers"));
-        driverList.add(new Driver("stef","s","Stef Philipsen"));
-        driverList.add(new Driver("koen","k","Koen Meeuws"));
+        cbRemember = (CheckBox) findViewById(R.id.cbRemember);
+        txtUsername = (EditText) findViewById(R.id.txtUsername);
+        txtPassword = (EditText) findViewById(R.id.txtPassword);
 
-        carList.add(new Car("Peugeot 206",CarBrand.PEUGEOT, R.mipmap.peugeot, 2001, "Benzine", 90 ,185000, "XH-FJ-99", driverList.get(0)));
-        carList.add(new Car("Volkswagen Polo",CarBrand.VW, R.mipmap.vw, 2008, "Diesel", 122, 54500, "BL-AB-LA", driverList.get(1)));
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        cbRemember.setChecked(sharedPref.getBoolean("remember", false));
+
+        if (cbRemember.isChecked()) {
+
+            String defaultUsername = getResources().getString(R.string.username);
+            String defaultPassword = getResources().getString(R.string.password);
+            String username = sharedPref.getString(getString(R.string.username), defaultUsername);
+            String password = sharedPref.getString(getString(R.string.password), defaultPassword);
+
+            txtUsername.setText(username);
+            txtPassword.setText(password);
+        }
+
+        driverList.add(new Driver("geert", "g", "Geert Berkers"));
+        driverList.add(new Driver("stef", "s", "Stef Philipsen"));
+        driverList.add(new Driver("koen", "k", "Koen Meeuws"));
+
+        carList.add(new Car("Peugeot 206", CarBrand.PEUGEOT, R.mipmap.peugeot, 2001, "Benzine", 90, 185000, "XH-FJ-99", driverList.get(0)));
+        carList.add(new Car("Volkswagen Polo", CarBrand.VW, R.mipmap.vw, 2008, "Diesel", 122, 54500, "BL-AB-LA", driverList.get(1)));
         carList.add(new Car("BMW M3", CarBrand.BMW, R.mipmap.bmw, 2014, "LPG", 147, 10000.5, "JA-33-NE", driverList.get(2)));
 
         carList.get(0).setFavorite(true);
@@ -47,14 +70,13 @@ public class MainActivity extends ActionBarActivity {
         ritList.add(new Rit(1, 1, 12.12));
 
         manager = new Manager();
-        // INTEGER TO TEST MANAGER
-        manager.setMyInt(100);
+        manager.setMyInt(1);
         manager.setCars(carList);
         manager.setDrivers(driverList);
 
-        txtInfo = (TextView)findViewById(R.id.txtInfo);
-        txtUsername = (EditText)findViewById(R.id.txtUsername);
-        txtPassword = (EditText)findViewById(R.id.txtPassword);
+        txtInfo = (TextView) findViewById(R.id.txtInfo);
+        txtUsername = (EditText) findViewById(R.id.txtUsername);
+        txtPassword = (EditText) findViewById(R.id.txtPassword);
 
         txtUsername.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
@@ -76,6 +98,14 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
+
+    }
+
+
+    public void cbRememberPressed(View view) {
+        if (view.getId() == R.id.cbRemember) {
+            
+        }
     }
 
     @Override
@@ -89,6 +119,9 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
+            // TODO
+            int i = 0;
+            System.out.println(i);
             return true;
         }
 
@@ -100,15 +133,24 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void logIn() {
+        if (cbRemember.isChecked()) {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.clear();
+            editor.putBoolean("remember", true);
+            editor.putString(getString(R.string.username), txtUsername.getText().toString());
+            editor.putString(getString(R.string.password), txtPassword.getText().toString());
+            editor.commit();
+        }
+        else{
+            sharedPref.edit().putBoolean("remember", false).commit();
+        }
         Driver loggedIn = manager.Login(txtUsername.getText().toString(), txtPassword.getText().toString());
-        if(loggedIn != null)
-        {
+        if (loggedIn != null) {
             Intent intent = new Intent(MainActivity.this, Overview.class);
             intent.putExtra("parcel", manager);
             this.startActivity(intent);
             finish();
-        }
-        else {
+        } else {
             txtInfo.setText(R.string.logInFailed);
         }
     }
@@ -123,7 +165,7 @@ public class MainActivity extends ActionBarActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         popupName = input.getText().toString();
                         manager.Register(getApplicationContext(), txtUsername.getText().toString(), txtPassword.getText().toString(), popupName);
-                        if(manager.Login(txtUsername.getText().toString(), txtPassword.getText().toString()) != null) {
+                        if (manager.Login(txtUsername.getText().toString(), txtPassword.getText().toString()) != null) {
                             logIn();
                         }
                     }

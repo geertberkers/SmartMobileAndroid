@@ -3,22 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
+    android:padding="5dp"
     android:background="@color/indigo"
-    android:padding="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/imgProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:contentDescription="@string/profile"
-        android:src="@drawable/person" />
+        android:contentDescription="@string/logo"
+        android:src="@drawable/logo" />
 
     <TextView
         android:id="@+id/txtInfo"
         style="@style/textStyle"
+        android:layout_margin="0dp"
+        android:padding="2dp"
         android:layout_below="@+id/imgProfile"
         android:layout_centerHorizontal="true"
         android:textColor="@color/red" />
@@ -42,10 +44,19 @@
         android:singleLine="true"
         android:text="@string/password" />
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rememberMe"
+        android:id="@+id/cbRemember"
+        android:layout_below="@id/txtPassword"
+        android:layout_alignLeft="@id/txtPassword"
+        android:onClick="cbRememberPressed"/>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtPassword"
+        android:layout_below="@id/cbRemember"
         android:orientation="horizontal"
         android:weightSum="1">
 

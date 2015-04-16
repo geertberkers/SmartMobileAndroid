@@ -23,16 +23,7 @@
     <string name="KMStand">Kilometerstand</string>
     <string name="year">Bouwjaar</string>
     <string name="addRit">Add rit!</string>
-
-    <string-array name="cars">
-        <item >Peugeot 206</item>
-        <item >Volkswagen Polo</item>
-        <item >Bugatti Veyron SS</item>
-        <item >Add Car</item>
-    </string-array>
-
     <string name="menu_picture">Menu Picture</string>
-
     <string name="drawer_open">Open Navigation Drawer</string>
     <string name="drawer_close">Close Navigation Drawer</string>
     <string name="favoriteCar">favoriteCar</string>
@@ -44,7 +35,7 @@
     <string name="HPValue">144</string>
     <string name="mileage">Kilometerstand</string>
     <string name="mileageValue">115.000</string>
-    <string name="licenseplateValue">11-11-11</string>
+    <string name="licenseplateValue">11–11–11</string>
     <string name="licenseplate">Kenteken</string>
     <string name="owner">Eigenaar</string>
     <string name="ownerValue">Geert</string>
@@ -53,5 +44,8 @@
     <string name="selectedCar">Selected Car</string>
     <string name="title_activity_location">LocationActivity</string>
     <string name="track">Track location</string>
+    <string name="otherImage">Add other image</string>
+    <string name="rememberMe">Remember me</string>
+    <string name="logo">Logo</string>
 
 </resources>

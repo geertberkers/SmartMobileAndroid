@@ -71,7 +71,6 @@ public class Manager implements Parcelable{
                 try {
                     JSONObject oneObject = jArray.getJSONObject(i);
                     // Pulling items from the array
-                    int driverID = oneObject.getInt("DriverID");
                     String username = oneObject.getString("Username");
                     String name = oneObject.getString("Name");
                     return new Driver(username, name);

@@ -38,6 +38,29 @@
                 android:scaleType="centerCrop"
                 android:id="@+id/carPhoto" />
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/carPhoto">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Make new photo"
+                    android:id="@+id/btnAddNewImage"
+                    android:layout_weight="0.5"
+                    android:onClick="addNewImage"  />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Choose from gallery"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btnAddGalleryImage"
+                    android:onClick="addGalleryImage"/>
+            </LinearLayout>
+
             <TableLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -179,6 +202,7 @@
                     android:textSize="20sp"
                     android:onClick="historyOnClick" />
             </TableLayout>
+
         </RelativeLayout>
     <!--</FrameLayout>-->
 
