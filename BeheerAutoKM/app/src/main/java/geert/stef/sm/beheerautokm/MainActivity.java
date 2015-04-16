@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -54,6 +55,8 @@ public class MainActivity extends ActionBarActivity {
         txtInfo = (TextView)findViewById(R.id.txtInfo);
         txtUsername = (EditText)findViewById(R.id.txtUsername);
         txtPassword = (EditText)findViewById(R.id.txtPassword);
+
+        txtUsername.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         txtUsername.setOnTouchListener(new View.OnTouchListener() {
             @Override

@@ -2,6 +2,7 @@ package geert.stef.sm.beheerautokm;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -198,5 +199,11 @@ public class AddRitActivity extends ActionBarActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void trackLocation(View view) {
+        Intent intent = new Intent(this, LocationActivity.class);
+        this.startActivity(intent);
+        finish();
     }
 }
