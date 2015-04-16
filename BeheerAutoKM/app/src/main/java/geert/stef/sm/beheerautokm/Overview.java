@@ -1,13 +1,22 @@
 package geert.stef.sm.beheerautokm;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.hardware.Camera;
+import android.media.AudioManager;
+import android.provider.MediaStore;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +27,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Overview extends ActionBarActivity implements AdapterView.OnItemClickListener {
     Manager manager;
@@ -30,15 +43,19 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
     private MyAdapter myAdapter;
     private ActionBarDrawerToggle drawerListener;
 
-    TextView tvCar;
-    TextView tvYear;
-    TextView tvFuel;
-    TextView tvHP;
-    TextView tvKM;
-    TextView tvLicensePlate;
-    TextView tvOwner;
-    CheckBox cbFavorite;
-    ImageView ivCar;
+    private TextView tvCar;
+    private TextView tvYear;
+    private TextView tvFuel;
+    private TextView tvHP;
+    private TextView tvKM;
+    private TextView tvLicensePlate;
+    private TextView tvOwner;
+    private CheckBox cbFavorite;
+    private ImageView ivCar;
+    private Bitmap bitmap;
+
+    private static final int REQUEST_CODE_CAPTURE = 1;
+    private static final int REQUEST_CODE_SELECT = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +94,11 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
 
         drawerListener = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
             public void onDrawerClosed(View view) {
-                Toast.makeText(Overview.this, "Closed", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(Overview.this, "Closed", Toast.LENGTH_SHORT).show();
             }
 
             public void onDrawerOpened(View drawerView) {
-                Toast.makeText(Overview.this, "Opened", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(Overview.this, "Opened", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -192,8 +209,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
     public void setAsFavorite(View view) {
         if (view.getId() == R.id.cbFavorite) {
 
-            if(cbFavorite.isChecked())
-            {
+            if (cbFavorite.isChecked()) {
                 for (int i = 0; i < manager.getCars().size(); i++) {
                     manager.getCars().get(i).setFavorite(false);
                     if (manager.getCars().get(i).equals(selectedCar)) {
@@ -201,8 +217,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
                     }
                 }
                 myAdapter.setCarList(manager.getCars());
-            }
-            else {
+            } else {
                 cbFavorite.setChecked(true);
                 new AlertDialog.Builder(this)
                         .setTitle("Favorite Car")
@@ -211,6 +226,59 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
                             public void onClick(DialogInterface dialog, int whichButton) {
                             }
                         }).show();
+            }
+        }
+    }
+
+    public void addGalleryImage(View view) {
+        if (view.getId() == R.id.btnAddGalleryImage) {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            startActivityForResult(intent, REQUEST_CODE_SELECT);
+        }
+    }
+
+    public void addNewImage(View view){
+        if (view.getId() == R.id.btnAddNewImage){
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if(takePictureIntent.resolveActivity(getPackageManager()) != null){
+                startActivityForResult(takePictureIntent, REQUEST_CODE_CAPTURE);
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        InputStream stream = null;
+
+        if (requestCode == REQUEST_CODE_CAPTURE && resultCode == Activity.RESULT_OK){
+            Bundle extras = data.getExtras();
+            bitmap = (Bitmap) extras.get("data");
+
+            // TO DO GET FULL IMAGE AND RESIZE
+            ivCar.setImageBitmap(bitmap);
+        }
+        else if (requestCode == REQUEST_CODE_SELECT && resultCode == Activity.RESULT_OK){
+            try {
+                if (bitmap != null) { bitmap.recycle(); }
+                stream = getContentResolver().openInputStream(data.getData());
+                bitmap = BitmapFactory.decodeStream(stream);
+
+                ivCar.setImageBitmap(bitmap);
+            }
+            catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            finally {
+                if (stream != null) {
+                    try {
+                        stream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }
