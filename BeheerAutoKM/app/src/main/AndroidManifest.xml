@@ -44,6 +44,10 @@
             android:name=".HistoryActivity"
             android:label="@string/title_activity_history" >
         </activity>
+        <activity
+            android:name=".AddCar"
+            android:label="@string/title_activity_addcar" >
+        </activity>
     </application>
 
 </manifest>

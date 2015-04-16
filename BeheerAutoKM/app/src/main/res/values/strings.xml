@@ -8,7 +8,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_add_rit">AddRitActivity</string>
     <string name="title_activity_history">HistoryActivity</string>
-    <string name="password">Pasword</string> <!-- Username -->
+    <string name="title_activity_addcar">AddCarActivity</string>
+    <string name="password">Pasword</string>
     <string name="login">Log in!</string>
     <string name="createAccount">Create account</string>
     <string name="username">Username</string>
@@ -19,8 +20,36 @@
     <string name="silver">Zilver</string>
     <string name="color">Kleur</string>
     <string name="valueKM">12.564</string>
-    <string name="KMStand">Kilometerstand</string>
+    <string name="KMStand">Kilometerstand   </string>
     <string name="year">Bouwjaar</string>
     <string name="addRit">Add rit!</string>
+
+    <string-array name="cars">
+        <item >Peugeot 206</item>
+        <item >Volkswagen Polo</item>
+        <item >Bugatti Veyron SS</item>
+        <item >Add Car</item>
+    </string-array>
+
+    <string name="menu_picture">Menu Picture</string>
+
+    <string name="drawer_open">Open Navigation Drawer</string>
+    <string name="drawer_close">Close Navigation Drawer</string>
+    <string name="favoriteCar">favoriteCar</string>
+    <string name="car">Car</string>
+    <string name="fuel">Brandstof</string>
+    <string name="yearValue">2013</string>
+    <string name="fuelValue">Benzine</string>
+    <string name="HP">Paardenkracht</string>
+    <string name="HPValue">144</string>
+    <string name="mileage">Kilometerstand</string>
+    <string name="mileageValue">115.000</string>
+    <string name="licenseplateValue">11-11-11</string>
+    <string name="licenseplate">Kenteken</string>
+    <string name="owner">Eigenaar</string>
+    <string name="ownerValue">Geert</string>
+    <string name="favCar">Favorite Car</string>
+    <string name="addCar">Add Car</string>
+    <string name="selectedCar">Selected Car</string>
 
 </resources>

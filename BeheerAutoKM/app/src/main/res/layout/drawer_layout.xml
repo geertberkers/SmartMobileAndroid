@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/menuPicture"
-        android:textColor="#FF000000"
+        android:textColor="#FFFFFF"
         android:textSize="15sp" />
 
     <ImageView
@@ -36,4 +36,4 @@
         android:paddingRight="10dp"
         android:paddingTop="10dp" />
 
-</RelativeLayout><!-- From: file:/C:/Android/SmartMobileAndroid/NavigationDrawer/app/src/main/res/layout/drawer_layout.xml -->
+</RelativeLayout>

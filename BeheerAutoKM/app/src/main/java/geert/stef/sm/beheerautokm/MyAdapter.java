@@ -1,5 +1,4 @@
-package geert.berkers.navigationdrawer;
-
+package geert.stef.sm.beheerautokm;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,15 +30,11 @@ public class MyAdapter extends BaseAdapter {
         return carList;
     }
 
-    public MyAdapter(Context context){
+    public void  setCarList(List<Car> carList){ this.carList = carList; notifyDataSetChanged();}
+
+    public MyAdapter(Context context, List<Car> carList){
         this.context = context;
-
-        cars = context.getResources().getStringArray(R.array.cars);
-
-        for(int i = 0; i<cars.length;i++)
-        {
-            carList.add(new Car(cars[i],images[i]));
-        }
+        this.carList = carList;
     }
 
     @Override
@@ -73,9 +68,9 @@ public class MyAdapter extends BaseAdapter {
         ImageView titleImageView = (ImageView) row.findViewById(R.id.menuPicture);
         ImageView favoriteImageView = (ImageView) row.findViewById(R.id.favoriteCar);
 
-        titleMenuItem.setText(carList.get(position).getCarName());
+        titleMenuItem.setText(carList.get(position).getCar());
         titleImageView.setImageResource(carList.get(position).getImage());
-        if(carList.get(position).isFavorite()) { favoriteImageView.setImageResource(R.drawable.favorite);}
+        if(carList.get(position).isFavorite()) { favoriteImageView.setImageResource(R.drawable.favorite);} else { favoriteImageView.setImageResource(0);}
 
         return row;
     }
