@@ -1,6 +1,8 @@
 package geert.stef.sm.beheerautokm;
 
+import android.annotation.TargetApi;
 import android.os.AsyncTask;
+import android.os.Build;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -10,6 +12,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 /**
  * Created by Stef on 9-4-2015.
  */
+@TargetApi(Build.VERSION_CODES.CUPCAKE)
 public class AddRitTask extends AsyncTask {
 
     @Override

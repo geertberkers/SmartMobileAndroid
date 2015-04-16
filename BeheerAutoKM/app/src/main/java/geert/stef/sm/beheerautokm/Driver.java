@@ -17,6 +17,12 @@ public class Driver implements Parcelable {
         this.password = password;
         this.name = name;
     }
+
+    public Driver(String username, String name)
+    {
+        this.username = username;
+        this.name = name;
+    }
     public String getName() {
         return name;
     }

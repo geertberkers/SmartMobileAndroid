@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -32,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         driverList.add(new Driver("geert","g","Geert Berkers"));
-        driverList.add(new Driver("stef","s","Stef Phillipsen"));
+        driverList.add(new Driver("stef","s","Stef Philipsen"));
         driverList.add(new Driver("koen","k","Koen Meeuws"));
 
         carList.add(new Car("Peugeot", 2001, "Benzine", 90 ,185000, "XH-FJ-99", driverList.get(0)));
@@ -94,8 +95,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void logIn() {
-        boolean loggedIn = manager.Login(this, txtUsername.getText().toString(), txtPassword.getText().toString());
-        if(loggedIn)
+        Driver loggedIn = manager.Login(txtUsername.getText().toString(), txtPassword.getText().toString());
+        if(loggedIn != null)
         {
             Intent intent = new Intent(MainActivity.this, Overview.class);
             intent.putExtra("parcel", manager);
@@ -117,7 +118,7 @@ public class MainActivity extends ActionBarActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         popupName = input.getText().toString();
                         manager.Register(getApplicationContext(), txtUsername.getText().toString(), txtPassword.getText().toString(), popupName);
-                        if(manager.Login(getApplicationContext(),txtUsername.getText().toString(), txtPassword.getText().toString())) {
+                        if(manager.Login(txtUsername.getText().toString(), txtPassword.getText().toString()) != null) {
                             logIn();
                         }
                     }

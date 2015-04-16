@@ -7,8 +7,13 @@ import android.os.Parcelable;
 
 import com.google.android.gms.internal.pa;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class Manager implements Parcelable{
 
@@ -36,15 +41,48 @@ public class Manager implements Parcelable{
         in.readTypedList(drivers, Driver.CREATOR);
     }
 
-    public boolean Login(Context c, String username, String password){
-        boolean correct = false;
-        for(Driver d : drivers) {
-            if ((d.getUsername().equals(username)) && (d.getPassword().equals(password))) {
-                correct = true;
-                this.loggedInDriver = d;
-            }
+    public Driver Login(String username, String password){
+        LogInTask loginTask = new LogInTask();
+        String t = "";
+        try {
+            Object o = loginTask.execute(username, password).get();
+            t = o.toString();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
-        return correct;
+
+       // String json = o.toString();
+        //String json2 =  loginTask.test();
+        return parseJson(t);
+        //return null;
+    }
+
+    public Driver parseJson(String json)
+    {
+        Driver d;
+        try {
+            //JSONObject jObject = new JSONObject(json);
+            JSONArray jArray =  new JSONArray(json);
+
+            for (int i=0; i < jArray.length(); i++)
+            {
+                try {
+                    JSONObject oneObject = jArray.getJSONObject(i);
+                    // Pulling items from the array
+                    int driverID = oneObject.getInt("DriverID");
+                    String username = oneObject.getString("Username");
+                    String name = oneObject.getString("Name");
+                    return new Driver(username, name);
+                } catch (JSONException e) {
+                    // Oops
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void Register(Context c, String username, String password, String name)
