@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:layout_weight="1"
     android:padding="5dp"
-    android:background="@color/indigo"
+    android:background="@color/blue"
     tools:context=".MainActivity">
 
     <ImageView

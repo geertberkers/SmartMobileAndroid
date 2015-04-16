@@ -1,5 +1,6 @@
 package geert.stef.sm.beheerautokm;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Car implements Parcelable {
     private Driver owner;
     private boolean favorite;
     private List<Rit> ritten;
+    private Bitmap localImage;
 
     public Car(String name,CarBrand brand, int image, int year, String fuel, int horsepower, double mileage, String licensePlate, Driver owner){
         this.car = name;
@@ -171,5 +173,13 @@ public class Car implements Parcelable {
 
     public void setBrand(CarBrand brand) {
         this.brand = brand;
+    }
+
+    public Bitmap getLocalImage() {
+        return localImage;
+    }
+
+    public void setLocalImage(Bitmap localImage) {
+        this.localImage = localImage;
     }
 }

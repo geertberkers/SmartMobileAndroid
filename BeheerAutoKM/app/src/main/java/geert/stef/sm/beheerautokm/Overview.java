@@ -5,12 +5,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.hardware.Camera;
-import android.media.AudioManager;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -26,11 +26,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Overview extends ActionBarActivity implements AdapterView.OnItemClickListener {
     Manager manager;
@@ -53,6 +56,8 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
     private CheckBox cbFavorite;
     private ImageView ivCar;
     private Bitmap bitmap;
+    private String mCurrentPhotoPath;
+    private SharedPreferences sharedPref;
 
     private static final int REQUEST_CODE_CAPTURE = 1;
     private static final int REQUEST_CODE_SELECT = 2;
@@ -102,10 +107,59 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
             }
         };
 
-        drawerLayout.setDrawerListener(drawerListener);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        for (Car c : manager.getCars()) {
+            String directory = sharedPref.getString("dir", "");
+            String image = sharedPref.getString("car" + c.getCar(), "");
+
+            if (directory.equals("") || image.equals("")) {
+                System.out.println("Empty");
+            } else {
+                int position = manager.getCars().indexOf(c);
+                manager.getCars().get(position).setLocalImage(createImageFromFilePath(directory, image));
+
+                if (c.equals(selectedCar)) {
+                    ivCar.setImageBitmap(selectedCar.getLocalImage());
+                }
+            }
+
+            drawerLayout.setDrawerListener(drawerListener);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    public Bitmap createImageFromFilePath(String path, String imageName) {
+        File file = new File(path, imageName);
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), bmOptions);
+        return bitmap;
+    }
+
+    public boolean saveImageToInternalStorage(Bitmap bitmap, String car) {
+
+        try {
+            File sdCard = Environment.getExternalStorageDirectory();
+            File dir = new File(sdCard.getAbsolutePath() + "/BeheerAutoKM/");
+            dir.mkdirs();
+
+            File file = new File(dir, car + ".png");
+
+            FileOutputStream fos = new FileOutputStream(file);
+
+            bitmap.compress(Bitmap.CompressFormat.PNG, 10, fos);
+
+            fos.close();
+
+            sharedPref.edit().putString("dir", dir.getAbsolutePath() + "/").apply();
+            sharedPref.edit().putString("car" + car, car + ".png").apply();
+
+            return true;
+        } catch (Exception e) {
+            Log.e("saveToInternalStorage()", e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -130,8 +184,21 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            // Pressed on Settings menu
+        if (id == R.id.action_logOff)  {
+            Intent intent = new Intent(Overview.this, MainActivity.class);
+            intent.putExtra("parcel", manager);
+            this.startActivity(intent);
+            this.finish();
+            return true;
+        }
+        if (id == R.id.action_clearPhoto)  {
+            sharedPref.edit().clear().apply();
+            for(int i = 0; i < manager.getCars().size(); i++)
+            {
+                manager.getCars().get(i).setLocalImage(null);
+            }
+            myAdapter.notifyDataSetChanged();
+
             return true;
         }
 
@@ -191,8 +258,13 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
         System.out.println(selectedCar);
 
         tvCar.setText(selectedCar.getCar());
-        ivCar.setImageResource(selectedCar.getImage());
-        ivCar.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        if (selectedCar.getLocalImage() != null) {
+            ivCar.setImageBitmap(selectedCar.getLocalImage());
+        } else {
+            ivCar.setImageResource(selectedCar.getImage());
+            ivCar.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
         tvYear.setText(String.valueOf(selectedCar.getYear()));
         tvFuel.setText(selectedCar.getFuel());
         tvHP.setText(String.valueOf(selectedCar.getHorsepower()));
@@ -204,6 +276,8 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
         } else {
             cbFavorite.setChecked(false);
         }
+
+
     }
 
     public void setAsFavorite(View view) {
@@ -240,11 +314,82 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
         }
     }
 
-    public void addNewImage(View view){
-        if (view.getId() == R.id.btnAddNewImage){
+    public void addNewImage(View view) {
+        if (view.getId() == R.id.btnAddNewImage) {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if(takePictureIntent.resolveActivity(getPackageManager()) != null){
-                startActivityForResult(takePictureIntent, REQUEST_CODE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+
+                File photoFile = null;
+                try {
+                    photoFile = createImageFile();
+                } catch (IOException ex) {
+                    // Error occurred while creating the File
+
+                }
+                // Continue only if the File was successfully created
+                if (photoFile != null) {
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                    startActivityForResult(takePictureIntent, REQUEST_CODE_CAPTURE);
+                }
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+
+        File storageDir = new File(Environment.getExternalStorageDirectory().toString() + "/BeheerAutoKM/");
+        storageDir.mkdirs();
+
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+
+        mCurrentPhotoPath = image.getAbsolutePath();
+        //   sharedPref.edit().putString("photoURL",mCurrentPhotoPath).commit();
+        //   galleryAddPic();
+
+        return image;
+    }
+/*
+    private void galleryAddPic() {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(mCurrentPhotoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
+    }*/
+
+    private void setPic() {
+        // Get the dimensions of the View
+        int targetW = ivCar.getWidth();
+        int targetH = ivCar.getHeight();
+
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW / targetW, photoH / targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        ivCar.setImageBitmap(bitmap);
+        setCarImage(bitmap);
+
+    }
+
+    public void setCarImage(Bitmap bitmap) {
+        for (int i = 0; i < manager.getCars().size(); i++) {
+            if (manager.getCars().get(i).equals(selectedCar)) {
+                manager.getCars().get(i).setLocalImage(bitmap);
+                saveImageToInternalStorage(bitmap, selectedCar.toString());
             }
         }
     }
@@ -253,25 +398,30 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         InputStream stream = null;
 
-        if (requestCode == REQUEST_CODE_CAPTURE && resultCode == Activity.RESULT_OK){
-            Bundle extras = data.getExtras();
-            bitmap = (Bitmap) extras.get("data");
-
-            // TO DO GET FULL IMAGE AND RESIZE
-            ivCar.setImageBitmap(bitmap);
-        }
-        else if (requestCode == REQUEST_CODE_SELECT && resultCode == Activity.RESULT_OK){
+        if (requestCode == REQUEST_CODE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            setPic();
+        } else if (requestCode == REQUEST_CODE_SELECT && resultCode == Activity.RESULT_OK) {
             try {
-                if (bitmap != null) { bitmap.recycle(); }
                 stream = getContentResolver().openInputStream(data.getData());
+
                 bitmap = BitmapFactory.decodeStream(stream);
 
+/*
+
+                if (bitmap.getHeight() > 969 || bitmap.getWidth() > 1079) {
+                    Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, 1080, 620, false);
+                    ivCar.setImageBitmap(resizedBitmap);
+                    ivCar.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    setCarImage(resizedBitmap);
+
+                } else {*/
                 ivCar.setImageBitmap(bitmap);
-            }
-            catch (FileNotFoundException e) {
+                ivCar.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                setCarImage(bitmap);
+                // }
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
-            }
-            finally {
+            } finally {
                 if (stream != null) {
                     try {
                         stream.close();
@@ -283,4 +433,5 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
         }
     }
 }
+
 

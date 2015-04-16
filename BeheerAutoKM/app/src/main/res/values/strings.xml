@@ -1,11 +1,8 @@
 <resources>
     <string name="app_name">Beheer Auto KM</string>
-
     <string name="namePerson">Test user</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_logOff">Log uit</string>
     <string name="title_activity_overview">Overview</string>
-
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_add_rit">AddRitActivity</string>
     <string name="title_activity_history">HistoryActivity</string>
     <string name="title_activity_addcar">AddCarActivity</string>
@@ -45,5 +42,7 @@
     <string name="otherImage">Add other image</string>
     <string name="rememberMe">Remember me</string>
     <string name="logo">Logo</string>
+    <string name="developers">Developers</string>
+    <string name="deletePhotos">Delete foto\'s</string>
 
 </resources>

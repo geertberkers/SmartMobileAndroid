@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class Manager implements Parcelable{
+public class Manager implements Parcelable {
 
     private int myInt = 0;
     private List<Car> cars;
@@ -26,14 +26,31 @@ public class Manager implements Parcelable{
         cars = new ArrayList<>();
     }
 
-    public List<Car> getCars(){return this.cars;}
-    public void setCars(List<Car> cars){this.cars = cars;}
-    public List<Driver> getDrivers(){return this.drivers;}
-    public void setDrivers(List<Driver> drivers) {this.drivers = drivers;}
-    public int getMyInt(){return this.myInt;}
-    public void setMyInt(int myInt){this.myInt = myInt;}
+    public List<Car> getCars() {
+        return this.cars;
+    }
 
-    public Manager(Parcel in){
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
+
+    public List<Driver> getDrivers() {
+        return this.drivers;
+    }
+
+    public void setDrivers(List<Driver> drivers) {
+        this.drivers = drivers;
+    }
+
+    public int getMyInt() {
+        return this.myInt;
+    }
+
+    public void setMyInt(int myInt) {
+        this.myInt = myInt;
+    }
+
+    public Manager(Parcel in) {
         myInt = in.readInt();
         cars = new ArrayList<>();
         drivers = new ArrayList<>();
@@ -41,7 +58,7 @@ public class Manager implements Parcelable{
         in.readTypedList(drivers, Driver.CREATOR);
     }
 
-    public Driver Login(String username, String password){
+    public Driver Login(String username, String password) {
         LogInTask loginTask = new LogInTask();
         String t = "";
         try {
@@ -53,25 +70,32 @@ public class Manager implements Parcelable{
             e.printStackTrace();
         }
 
-       // String json = o.toString();
+        // String json = o.toString();
         //String json2 =  loginTask.test();
         return parseJson(t);
         //return null;
     }
 
-    public Driver parseJson(String json)
-    {
+    public Driver loginLocal(String username, String password) {
+        for (Driver d : drivers) {
+            if (d.getUsername().equals(username) && d.getPassword().equals(password)) {
+                return d;
+            }
+        }
+        return null;
+    }
+
+    public Driver parseJson(String json) {
         Driver d;
         try {
             //JSONObject jObject = new JSONObject(json);
-            JSONArray jArray =  new JSONArray(json);
+            JSONArray jArray = new JSONArray(json);
 
-            for (int i=0; i < jArray.length(); i++)
-            {
+            for (int i = 0; i < jArray.length(); i++) {
                 try {
                     JSONObject oneObject = jArray.getJSONObject(i);
                     // Pulling items from the array
-                    int driverID = oneObject.getInt("DriverID");
+                   // int driverID = oneObject.getInt("DriverID");
                     String username = oneObject.getString("Username");
                     String name = oneObject.getString("Name");
                     return new Driver(username, name);
@@ -85,9 +109,8 @@ public class Manager implements Parcelable{
         return null;
     }
 
-    public void Register(Context c, String username, String password, String name)
-    {
-        drivers.add(new Driver(username,password,name));
+    public void Register(String username, String password, String name) {
+        drivers.add(new Driver(username, password, name));
     }
 
     @Override
@@ -103,7 +126,7 @@ public class Manager implements Parcelable{
     }
 
     public static final Parcelable.Creator<Manager> CREATOR
-            = new Parcelable.Creator<Manager>(){
+            = new Parcelable.Creator<Manager>() {
 
         @Override
         public Manager createFromParcel(Parcel in) {
