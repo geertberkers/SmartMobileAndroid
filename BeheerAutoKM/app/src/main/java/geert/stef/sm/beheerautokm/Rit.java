@@ -11,27 +11,29 @@ import java.util.Date;
 public class Rit implements Parcelable {
 
     private int ritID;
-    private int carID;
+    private String car;
     private double distance;
     private Driver driver;
     private Date date;
 
-    public Rit(int ritID, int carID, double distance) {
+    public Rit(int ritID, String carID, double distance, String driver) {
         this.ritID = ritID;
-        this.carID = carID;
+        this.car = carID;
         this.distance = distance;
+        this.driver = new Driver(driver);
     }
 
-    public Rit(int ritID, int carID, double distance, Date date) {
+    public Rit(int ritID, String carID, double distance, String driver, Date date) {
         this.ritID = ritID;
-        this.carID = carID;
+        this.car = carID;
         this.distance = distance;
         this.date = date;
+        this.driver = new Driver(driver);
     }
 
     public Rit(Parcel read){
         this.ritID = read.readInt();
-        this.carID = read.readInt();
+        this.car = read.readString();
         this.distance = read.readDouble();
         this.driver = new Driver(read.readString(),read.readString(),read.readString());
         //this.date = new Date(....);
@@ -59,7 +61,7 @@ public class Rit implements Parcelable {
     @Override
     public void writeToParcel(Parcel arg0, int arg1) {
         arg0.writeInt(ritID);
-        arg0.writeInt(carID);
+        arg0.writeString(car);
         arg0.writeDouble(distance);
         arg0.writeString(driver.getUsername());
         arg0.writeString(driver.getPassword());

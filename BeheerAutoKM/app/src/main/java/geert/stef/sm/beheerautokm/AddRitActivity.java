@@ -181,8 +181,9 @@ public class AddRitActivity extends ActionBarActivity {
                     JSONObject oneObject = jArray.getJSONObject(i);
                     // Pulling items from the array
                     int ritID = oneObject.getInt("RitID");
-                    int carID = oneObject.getInt("CarID");
+                    String car = oneObject.getString("Car");
                     double distance = oneObject.getDouble("Distance");
+                    String driver = oneObject.getString("Driver");
 
                     int year = Integer.parseInt(oneObject.getString("Datum").substring(0,4));
                     int month = Integer.parseInt(oneObject.getString("Datum").substring(5,7));
@@ -190,7 +191,7 @@ public class AddRitActivity extends ActionBarActivity {
 
                     Date date = new Date(year,month, day);
                     System.out.println(date.toString());
-                    ritten.add(new Rit(ritID, carID, distance));
+                    ritten.add(new Rit(ritID, car, distance, driver));
                 } catch (JSONException e) {
                     // Oops
 

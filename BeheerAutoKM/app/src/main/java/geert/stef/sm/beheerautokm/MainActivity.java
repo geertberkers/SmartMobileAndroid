@@ -66,8 +66,8 @@ public class MainActivity extends ActionBarActivity {
 
         carList.get(0).setFavorite(true);
 
-        ritList.add(new Rit(1, 1, 12.12));
-        ritList.add(new Rit(1, 1, 12.12));
+        ritList.add(new Rit(1, "XH-FJ-99", 12.12, "Henk"));
+        ritList.add(new Rit(1, "AA-11-BB", 12.12, "Stef"));
 
         manager = new Manager();
         manager.setMyInt(1);
