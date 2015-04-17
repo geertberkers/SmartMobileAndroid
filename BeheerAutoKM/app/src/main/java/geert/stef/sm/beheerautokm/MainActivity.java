@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -23,17 +21,17 @@ import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
-    Manager manager;
-    EditText txtUsername;
-    EditText txtPassword;
-    TextView txtInfo;
-    String popupName;
-    CheckBox cbRemember;
+    private Manager manager;
+    private EditText txtUsername;
+    private EditText txtPassword;
+    private TextView txtInfo;
+    private String popupName;
+    private CheckBox cbRemember;
 
-    SharedPreferences sharedPref;
-    List<Car> carList = new ArrayList<>();
-    List<Driver> driverList = new ArrayList<>();
-    List<Rit> ritList = new ArrayList<>();
+    private SharedPreferences sharedPref;
+    private List<Car> carList = new ArrayList<>();
+    private List<Driver> driverList = new ArrayList<>();
+    private List<Rit> ritList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,20 +39,17 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         cbRemember = (CheckBox) findViewById(R.id.cbRemember);
-        txtUsername = (EditText) findViewById(R.id.txtUsername);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
+        txtUsername = (EditText) findViewById(R.id.tbUsername);
+        txtPassword = (EditText) findViewById(R.id.tbPassword);
 
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
 
-        //int id = Resources.getSystem().getIdentifier("btn_check_holo_light", "drawable", "android");
-        //cbRemember.setButtonDrawable(id);
-        cbRemember.setTextColor(Color.parseColor("#FFFFFF"));
         cbRemember.setChecked(sharedPref.getBoolean("remember", false));
 
         if (cbRemember.isChecked()) {
+            String defaultUsername = getResources().getString(R.string.usernameValue);
+            String defaultPassword = getResources().getString(R.string.passwordValue);
 
-            String defaultUsername = getResources().getString(R.string.username);
-            String defaultPassword = getResources().getString(R.string.password);
             String username = sharedPref.getString(getString(R.string.username), defaultUsername);
             String password = sharedPref.getString(getString(R.string.password), defaultPassword);
 
@@ -68,7 +63,6 @@ public class MainActivity extends ActionBarActivity {
 
         carList.add(new Car("Peugeot 206", CarBrand.PEUGEOT, R.mipmap.peugeot, 2001, "Benzine", 90, 185000, "XH-FJ-99", driverList.get(0)));
         carList.add(new Car("Volkswagen Polo", CarBrand.VW, R.mipmap.vw, 2008, "Diesel", 122, 54500, "BL-AB-LA", driverList.get(1)));
-        carList.add(new Car("BMW M3", CarBrand.BMW, R.mipmap.bmw, 2014, "LPG", 147, 10000.5, "JA-33-NE", driverList.get(2)));
 
         carList.get(0).setFavorite(true);
 
@@ -79,10 +73,11 @@ public class MainActivity extends ActionBarActivity {
         manager.setMyInt(1);
         manager.setCars(carList);
         manager.setDrivers(driverList);
+        manager.addCar(new Car("BMW M3", CarBrand.BMW, R.mipmap.bmw, 2014, "LPG", 147, 10000.5, "JA-33-NE", manager.getDrivers().get(2)));
 
         txtInfo = (TextView) findViewById(R.id.txtInfo);
-        txtUsername = (EditText) findViewById(R.id.txtUsername);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
+        txtUsername = (EditText) findViewById(R.id.tbUsername);
+        txtPassword = (EditText) findViewById(R.id.tbPassword);
 
         txtUsername.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 

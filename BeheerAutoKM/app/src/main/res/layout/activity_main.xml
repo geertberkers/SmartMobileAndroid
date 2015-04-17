@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:layout_weight="1"
     android:padding="5dp"
-    android:background="@color/blue"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
     <ImageView
@@ -18,40 +18,64 @@
 
     <TextView
         android:id="@+id/txtInfo"
-        style="@style/textStyle"
+        style="@style/textFieldLoginStyle"
         android:layout_margin="0dp"
         android:padding="2dp"
         android:layout_below="@+id/imgProfile"
         android:layout_centerHorizontal="true"
         android:textColor="@color/red" />
 
-    <EditText
+    <TextView
+        style="@style/textStyle"
+        android:text="@string/username"
         android:id="@+id/txtUsername"
-        style="@style/textFieldStyle"
+        android:layout_below="@+id/txtInfo"
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:padding="5dp"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        style="@style/textStyle"
+        android:layout_width="wrap_content"
+        android:text="@string/password"
+        android:id="@+id/txtPassword"
+        android:layout_below="@+id/txtUsername"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:padding="5dp"
+        android:layout_margin="5dp"/>
+
+    <EditText
+        style="@style/textFieldLoginStyle"
+        android:id="@+id/tbUsername"
+        android:layout_toRightOf="@+id/txtUsername"
         android:layout_below="@+id/txtInfo"
         android:layout_centerHorizontal="true"
         android:singleLine="true"
         android:inputType="textPassword"
-        android:text="@string/username" />
+        android:text="@string/usernameValue" />
 
     <EditText
-
-        android:id="@+id/txtPassword"
-        style="@style/textFieldStyle"
-        android:layout_below="@+id/txtUsername"
+        style="@style/textFieldLoginStyle"
+        android:id="@+id/tbPassword"
+        android:layout_below="@+id/tbUsername"
+        android:layout_toRightOf="@+id/txtPassword"
         android:layout_centerHorizontal="true"
         android:inputType="textPassword"
         android:singleLine="true"
-        android:text="@string/password" />
+        android:text="@string/passwordValue" />
 
     <CheckBox
+        style="@style/textStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rememberMe"
         android:id="@+id/cbRemember"
-        android:layout_below="@id/txtPassword"
-        android:layout_alignLeft="@id/txtPassword"
-        android:onClick="cbRememberPressed"/>
+        android:layout_below="@id/tbPassword"
+        android:layout_alignLeft="@id/tbPassword"
+        android:onClick="cbRememberPressed" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -72,5 +96,6 @@
             android:text="@string/login"
             style="@style/twoButtonStyle" />
     </LinearLayout>
+
 
 </RelativeLayout>

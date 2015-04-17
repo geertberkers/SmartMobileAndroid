@@ -9,14 +9,23 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 
 public class LocationActivity extends ActionBarActivity {
+
+    TextView txtLocation;
+    Manager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
+
+        Bundle b = getIntent().getExtras();
+        manager = b.getParcelable("parcel");
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -26,6 +35,11 @@ public class LocationActivity extends ActionBarActivity {
         }else{
             startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), 1);
         }
+
+        txtLocation = (TextView) findViewById(R.id.txtLocation);
+        txtLocation.setText("Location: " /* + location */);
+
+
     }
 
     @Override
@@ -43,7 +57,11 @@ public class LocationActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logOff)  {
+            Intent intent = new Intent(LocationActivity.this, MainActivity.class);
+            intent.putExtra("parcel", manager);
+            this.startActivity(intent);
+            this.finish();
             return true;
         }
 

@@ -1,16 +1,10 @@
 package geert.stef.sm.beheerautokm;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.google.android.gms.internal.pa;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -20,7 +14,6 @@ public class Manager implements Parcelable {
     private int myInt = 0;
     private List<Car> cars;
     private List<Driver> drivers;
-    private Driver loggedInDriver;
 
     public Manager() {
         cars = new ArrayList<>();
@@ -86,9 +79,7 @@ public class Manager implements Parcelable {
     }
 
     public Driver parseJson(String json) {
-        Driver d;
         try {
-            //JSONObject jObject = new JSONObject(json);
             JSONArray jArray = new JSONArray(json);
 
             for (int i = 0; i < jArray.length(); i++) {
@@ -99,7 +90,7 @@ public class Manager implements Parcelable {
                     String name = oneObject.getString("Name");
                     return new Driver(username, name);
                 } catch (JSONException e) {
-                    // Oops
+                    // Failed
                 }
             }
         } catch (JSONException e) {

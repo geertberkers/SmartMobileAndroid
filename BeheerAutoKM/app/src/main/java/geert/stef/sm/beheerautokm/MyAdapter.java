@@ -17,9 +17,6 @@ public class MyAdapter extends BaseAdapter {
     private Context context;
 
     private List<Car> carList = new ArrayList<>();
-    public List<Car> getCarList(){
-        return carList;
-    }
     public void  setCarList(List<Car> carList){ this.carList = carList; notifyDataSetChanged();}
 
     public MyAdapter(Context context, List<Car> carList){

@@ -3,7 +3,6 @@ package geert.stef.sm.beheerautokm;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -26,14 +25,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 public class Overview extends ActionBarActivity implements AdapterView.OnItemClickListener {
     Manager manager;
@@ -55,7 +52,6 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
     private TextView tvOwner;
     private CheckBox cbFavorite;
     private ImageView ivCar;
-    private Bitmap bitmap;
     private String mCurrentPhotoPath;
     private SharedPreferences sharedPref;
 
@@ -130,38 +126,6 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
         }
     }
 
-    public Bitmap createImageFromFilePath(String path, String imageName) {
-        File file = new File(path, imageName);
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), bmOptions);
-        return bitmap;
-    }
-
-    public boolean saveImageToInternalStorage(Bitmap bitmap, String car) {
-
-        try {
-            File sdCard = Environment.getExternalStorageDirectory();
-            File dir = new File(sdCard.getAbsolutePath() + "/BeheerAutoKM/");
-            dir.mkdirs();
-
-            File file = new File(dir, car + ".png");
-
-            FileOutputStream fos = new FileOutputStream(file);
-
-            bitmap.compress(Bitmap.CompressFormat.PNG, 10, fos);
-
-            fos.close();
-
-            sharedPref.edit().putString("dir", dir.getAbsolutePath() + "/").apply();
-            sharedPref.edit().putString("car" + car, car + ".png").apply();
-
-            return true;
-        } catch (Exception e) {
-            Log.e("saveToInternalStorage()", e.getMessage());
-            return false;
-        }
-    }
-
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -196,6 +160,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
             for(int i = 0; i < manager.getCars().size(); i++)
             {
                 manager.getCars().get(i).setLocalImage(null);
+                ivCar.setImageResource(manager.getCars().get(i).getImage());
             }
             myAdapter.notifyDataSetChanged();
 
@@ -203,6 +168,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
         }
 
         if (drawerListener.onOptionsItemSelected(item)) {
+            System.out.println("DrawerLister pressed");
             return true;
         }
 
@@ -216,6 +182,38 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
         listView.setAdapter(myAdapter);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        InputStream stream = null;
+
+        if (requestCode == REQUEST_CODE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            setPic();
+        } else if (requestCode == REQUEST_CODE_SELECT && resultCode == Activity.RESULT_OK) {
+            try {
+                stream = getContentResolver().openInputStream(data.getData());
+
+                Bitmap bitmap = BitmapFactory.decodeStream(stream);
+
+                resizeBitmap(bitmap);
+
+                ivCar.setImageBitmap(bitmap);
+                ivCar.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                setCarImage(bitmap);
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                if (stream != null) {
+                    try {
+                        stream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
     public void addRitOnClick(View view) {
         if (view.getId() == R.id.btnAddRit) {
             Intent intent = new Intent(this, AddRitActivity.class);
@@ -227,6 +225,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
     public void historyOnClick(View view) {
         if (view.getId() == R.id.btnHistory) {
             Intent intent = new Intent(this, HistoryActivity.class);
+            intent.putExtra("parcel",manager);
             this.startActivity(intent);
         }
     }
@@ -277,7 +276,6 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
             cbFavorite.setChecked(false);
         }
 
-
     }
 
     public void setAsFavorite(View view) {
@@ -296,9 +294,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
                 new AlertDialog.Builder(this)
                         .setTitle("Favorite Car")
                         .setMessage("You must have a favorite car")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                            }
+                        .setPositiveButton("OK", (dialog, whichButton) -> {
                         }).show();
             }
         }
@@ -321,7 +317,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
 
                 File photoFile = null;
                 try {
-                    photoFile = createImageFile();
+                    photoFile = createImageFile(selectedCar.getCar());
                 } catch (IOException ex) {
                     // Error occurred while creating the File
 
@@ -335,29 +331,27 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
         }
     }
 
-    private File createImageFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+    private File createImageFile(String car) throws IOException {
 
         File storageDir = new File(Environment.getExternalStorageDirectory().toString() + "/BeheerAutoKM/");
         storageDir.mkdirs();
 
-        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+        File image = File.createTempFile(car, ".jpg", storageDir);
 
         mCurrentPhotoPath = image.getAbsolutePath();
-        //   sharedPref.edit().putString("photoURL",mCurrentPhotoPath).commit();
-        //   galleryAddPic();
+
+        galleryAddPic();
 
         return image;
     }
-/*
+
     private void galleryAddPic() {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         File f = new File(mCurrentPhotoPath);
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
-    }*/
+    }
 
     private void setPic() {
         // Get the dimensions of the View
@@ -394,44 +388,53 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        InputStream stream = null;
+    public Bitmap resizeBitmap(Bitmap bitmap) {
+        if (bitmap.getHeight() > 4096 || bitmap.getWidth() > 4096) {
+            int width = (int) (bitmap.getWidth() * 0.9);
+            int height = (int) (bitmap.getHeight() * 0.9);
 
-        if (requestCode == REQUEST_CODE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            setPic();
-        } else if (requestCode == REQUEST_CODE_SELECT && resultCode == Activity.RESULT_OK) {
-            try {
-                stream = getContentResolver().openInputStream(data.getData());
+            Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, width, height, false);
 
-                bitmap = BitmapFactory.decodeStream(stream);
+            resizeBitmap(resizedBitmap);
 
-/*
+            return  resizedBitmap;
+        } else{
+            return bitmap;
+        }
 
-                if (bitmap.getHeight() > 969 || bitmap.getWidth() > 1079) {
-                    Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, 1080, 620, false);
-                    ivCar.setImageBitmap(resizedBitmap);
-                    ivCar.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    setCarImage(resizedBitmap);
+    }
 
-                } else {*/
-                ivCar.setImageBitmap(bitmap);
-                ivCar.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                setCarImage(bitmap);
-                // }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } finally {
-                if (stream != null) {
-                    try {
-                        stream.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+    public boolean saveImageToInternalStorage(Bitmap bitmap, String car) {
+
+        try {
+            File sdCard = Environment.getExternalStorageDirectory();
+            File dir = new File(sdCard.getAbsolutePath() + "/BeheerAutoKM/");
+            dir.mkdirs();
+
+            File file = new File(dir, car + ".jpg");
+
+            FileOutputStream fos = new FileOutputStream(file);
+
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+
+            fos.close();
+
+            sharedPref.edit().putString("dir", dir.getAbsolutePath() + "/").apply();
+            sharedPref.edit().putString("car" + car, car + ".jpg").apply();
+
+            return true;
+        } catch (Exception e) {
+            Log.e("saveToInternalStorage()", e.getMessage());
+            return false;
         }
     }
+
+    public Bitmap createImageFromFilePath(String path, String imageName) {
+        File file = new File(path, imageName);
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        return BitmapFactory.decodeFile(file.getAbsolutePath(), bmOptions);
+    }
+
 }
 
 

@@ -65,7 +65,11 @@ public class AddRitActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logOff)  {
+            Intent intent = new Intent(AddRitActivity.this, MainActivity.class);
+            intent.putExtra("parcel", manager);
+            this.startActivity(intent);
+            this.finish();
             return true;
         }
 

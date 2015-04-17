@@ -6,10 +6,12 @@
     <string name="title_activity_add_rit">AddRitActivity</string>
     <string name="title_activity_history">HistoryActivity</string>
     <string name="title_activity_addcar">AddCarActivity</string>
-    <string name="password">Pasword</string>
+    <string name="passwordValue">Password</string>
+    <string name="usernameValue">Username</string>
+    <string name="password">Password:</string>
+    <string name="username">Username:</string>
     <string name="login">Log in!</string>
     <string name="createAccount">Create account</string>
-    <string name="username">Username</string>
     <string name="profile">Profile</string>
     <string name="newRit">Nieuwe rit</string>
     <string name="history">Geschiedenis</string>
@@ -46,5 +48,7 @@
     <string name="logo">Logo</string>
     <string name="developers">Developers</string>
     <string name="deletePhotos">Delete foto\'s</string>
+    <string name="location">location</string>
+    <string name="logInFailed"><b>Inloggen mislukt!</b></string>
 
 </resources>

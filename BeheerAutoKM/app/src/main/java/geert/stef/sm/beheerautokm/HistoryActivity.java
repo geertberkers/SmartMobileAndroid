@@ -1,5 +1,6 @@
 package geert.stef.sm.beheerautokm;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,10 +9,15 @@ import android.view.MenuItem;
 
 public class HistoryActivity extends ActionBarActivity {
 
+    Manager manager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+        Bundle b = getIntent().getExtras();
+        manager = b.getParcelable("parcel");
     }
 
 
@@ -30,7 +36,11 @@ public class HistoryActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logOff)  {
+            Intent intent = new Intent(HistoryActivity.this, MainActivity.class);
+            intent.putExtra("parcel", manager);
+            this.startActivity(intent);
+            this.finish();
             return true;
         }
 

@@ -19,11 +19,11 @@
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@color/blue">
+            android:background="@color/background">
 
             <TextView
+                style="@style/textStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/car"
                 android:textSize="40sp"
                 android:id="@+id/txtCar"
@@ -71,31 +71,35 @@
                 <TableRow>
 
                     <TextView
+                        style="@style/textStyle"
                         android:id="@+id/txtYear"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/year"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"/>
 
                     <TextView
+                        style="@style/textStyle"
                         android:id="@+id/txtYearValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/yearValue"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"/>
 
                 </TableRow>
 
                 <TableRow>
 
                     <TextView
+                        style="@style/textStyle"
                         android:id="@+id/txtFuel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/fuel"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"/>
 
                     <TextView
+                        style="@style/textStyle"
                         android:id="@+id/txtFuelValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -107,6 +111,7 @@
                 <TableRow>
 
                     <TextView
+                        style="@style/textStyle"
                         android:id="@+id/txtHP"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -114,6 +119,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        style="@style/textStyle"
                         android:id="@+id/txtHPValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -125,6 +131,7 @@
                 <TableRow>
 
                     <TextView
+                        style="@style/textStyle"
                         android:id="@+id/txtMileage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -132,6 +139,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        style="@style/textStyle"
                         android:id="@+id/txtMileageValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -143,6 +151,7 @@
                 <TableRow>
 
                     <TextView
+                        style="@style/textStyle"
                         android:id="@+id/txtLicenseplate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -150,6 +159,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        style="@style/textStyle"
                         android:id="@+id/txtLicenseplateValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -161,6 +171,7 @@
                 <TableRow>
 
                     <TextView
+                        style="@style/textStyle"
                         android:id="@+id/txtOwner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -168,6 +179,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        style="@style/textStyle"
                         android:id="@+id/txtOwnerValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -179,6 +191,7 @@
                 <TableRow>
 
                     <CheckBox
+                        style="@style/textStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/favCar"
@@ -213,7 +226,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="start"
-        android:background="@color/blue"
+        android:background="@color/background"
         android:id="@+id/DrawerLinear">
 
         <ListView
