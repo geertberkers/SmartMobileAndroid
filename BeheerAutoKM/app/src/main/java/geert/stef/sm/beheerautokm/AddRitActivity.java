@@ -115,7 +115,8 @@ public class AddRitActivity extends ActionBarActivity implements AdapterView.OnI
 
             AsyncTask execute = new AddRitTask();
             //FAILS
-            execute.execute(distance.toString(), selectedCar.getLicensePlate(), manager.getLoggedIn().getUsername());
+            //execute.execute(distance.toString(), selectedCar.getLicensePlate(), manager.getLoggedIn().getUsername());
+            new AddRitTask().execute(distance, selectedCar.getLicensePlate(), manager.getLoggedIn());
             txtKMBegin.setText("");
             txtKMEind.setText("");
             showAddedDialog();
@@ -125,6 +126,21 @@ public class AddRitActivity extends ActionBarActivity implements AdapterView.OnI
         }
         //Car moet nog een ID hebben, dus moet ook met Parcelable geimplementeerd worden, 1 is testwaarde.
         //dc.addRit(distance, 1)
+    }
+
+    public void addRitKM(View view) {
+        Double distance = 0.00;
+        try {
+            if (tryParseDouble(txtKMTotaal.getText().toString())) {
+                distance = Double.parseDouble(txtKMTotaal.getText().toString());
+                //String distance, String license, String driver
+                new AddRitTask().execute(distance, selectedCar.getLicensePlate(), manager.getLoggedIn());
+                txtKMTotaal.setText("");
+                showAddedDialog();
+            }
+        } catch (Exception e) {
+            System.out.println("Convert to double failed.");
+        }
     }
 
     public boolean tryParseDouble(String value) {
@@ -213,7 +229,6 @@ public class AddRitActivity extends ActionBarActivity implements AdapterView.OnI
                     String car = oneObject.getString("Car");
                     double distance = oneObject.getDouble("Distance");
                     String driver = oneObject.getString("Driver");
-
                     int year = Integer.parseInt(oneObject.getString("Datum").substring(0, 4));
                     int month = Integer.parseInt(oneObject.getString("Datum").substring(5, 7));
                     int day = Integer.parseInt(oneObject.getString("Datum").substring(8, 10));

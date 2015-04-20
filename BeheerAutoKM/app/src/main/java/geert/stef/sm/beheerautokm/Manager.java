@@ -53,6 +53,7 @@ public class Manager implements Parcelable {
         drivers = new ArrayList<>();
         in.readTypedList(cars, Car.CREATOR);
         in.readTypedList(drivers, Driver.CREATOR);
+        loggedIn = (Driver) in.readParcelable(Driver.class.getClassLoader());
     }
 
     public Driver Login(String username, String password) {
@@ -118,6 +119,7 @@ public class Manager implements Parcelable {
         outParcel.writeInt(myInt);
         outParcel.writeTypedList(cars);
         outParcel.writeTypedList(drivers);
+        outParcel.writeParcelable(loggedIn, flags);
     }
 
     public static final Parcelable.Creator<Manager> CREATOR

@@ -18,20 +18,23 @@ public class AddRitTask extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] params) {
         String distance = String.valueOf(params[0].toString());
-        String kenteken = String.valueOf(params[1].toString());
-        String driver = String.valueOf(params[2].toString());
-        System.out.println(distance + kenteken + driver);
-        addRit(distance, kenteken, driver);
+        String license = String.valueOf(params[1].toString());
+        Driver d = (Driver)params[2];
+        String driver = d.getName();
+        //String driver = String.valueOf(params[2].toString());
+        System.out.println(distance + license + driver);
+        addRit(distance, license, driver);
         return null;
     }
 
-    public void addRit(String distance, String carID, String driver) {
+    public void addRit(String distance, String license, String driver) {
         String url = "http://stefp.nl/addRit.php";
-        String p1 = "?carid=" + carID;
+        String p1 = "?car='" + license + "'";
         String p2 = "&distance=" + distance;
-        String p3 = "&driver=1" + driver;
+        String p3 = "&driver='" + driver + "'";
         System.out.println(url + p1 + p2 + p3);
         this.hitUrl(url + p1 + p2 + p3);
+        //this.hitUrl("http://stefp.nl/addRit.php?car='XH-FJ-99'&distance=11.11&driver='Stef'");
     }
 
     public static HttpResponse hitUrl(String url) {
