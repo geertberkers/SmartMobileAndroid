@@ -21,7 +21,8 @@
     <string name="valueKM">12.564</string>
     <string name="KMStand">Kilometerstand</string>
     <string name="year">Bouwjaar</string>
-    <string name="addRit">Add rit!</string>
+    <string name="addRit">Add Begin Eind Rit!</string>
+    <string name="addRitTotaal">Add Gereden KM Rit</string>
     <string name="menu_picture">Menu Picture</string>
     <string name="drawer_open">Open Navigation Drawer</string>
     <string name="drawer_close">Close Navigation Drawer</string>

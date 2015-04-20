@@ -2,9 +2,11 @@ package geert.stef.sm.beheerautokm;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -12,11 +14,13 @@ import java.util.concurrent.ExecutionException;
 public class Manager implements Parcelable {
 
     private int myInt = 0;
+    private Driver loggedIn;
     private List<Car> cars;
     private List<Driver> drivers;
 
     public Manager() {
         cars = new ArrayList<>();
+        drivers = new ArrayList<>();
     }
 
     public List<Car> getCars() {
@@ -88,7 +92,8 @@ public class Manager implements Parcelable {
                     // Pulling items from the array
                     String username = oneObject.getString("Username");
                     String name = oneObject.getString("Name");
-                    return new Driver(username, name);
+                    loggedIn = new Driver(username, name);
+                    return loggedIn;
                 } catch (JSONException e) {
                     // Failed
                 }
@@ -133,5 +138,17 @@ public class Manager implements Parcelable {
         if (car != null) {
             this.cars.add(car);
         }
+    }
+
+    public Driver getLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(Driver loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+
+    public void logOff() {
+        this.loggedIn = null;
     }
 }

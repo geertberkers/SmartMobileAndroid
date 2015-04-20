@@ -15,13 +15,15 @@ public class Car implements Parcelable {
     private String fuel;
     private int horsepower;
     private double mileage;
+    private double KMTank;
+    private double KMDriven;
     private String licensePlate;
     private Driver owner;
     private boolean favorite;
     private List<Rit> ritten;
     private Bitmap localImage;
 
-    public Car(String name,CarBrand brand,  int image, int year, String fuel, int horsepower, double mileage, String licensePlate, Driver owner){
+    public Car(String name,CarBrand brand,  int image, int year, String fuel, int horsepower, double mileage, double KMTank, double KMDriven, String licensePlate, Driver owner){
         this.name = name;
         this.brand = brand;
         this.image = image;
@@ -29,6 +31,8 @@ public class Car implements Parcelable {
         this.fuel = fuel;
         this.horsepower = horsepower;
         this.mileage = mileage;
+        this.KMTank = KMTank;
+        this.KMDriven = KMDriven;
         this.licensePlate = licensePlate;
         this.owner = owner;
         this.favorite = false;
@@ -49,6 +53,8 @@ public class Car implements Parcelable {
         this.fuel = read.readString();
         this.horsepower = read.readInt();
         this.mileage = read.readDouble();
+        this.KMTank = read.readDouble();
+        this.KMDriven = read.readDouble();
         this.licensePlate = read.readString();
         this.owner = new Driver(read.readString(),read.readString(),read.readString());
         this.favorite = (read.readInt() == 0) ? false : true;
@@ -89,6 +95,8 @@ public class Car implements Parcelable {
         arg0.writeString(fuel);
         arg0.writeInt(horsepower);
         arg0.writeDouble(mileage);
+        arg0.writeDouble(KMTank);
+        arg0.writeDouble(KMDriven);
         arg0.writeString(licensePlate);
         arg0.writeString(owner.getUsername());
         arg0.writeString(owner.getPassword());
@@ -156,7 +164,7 @@ public class Car implements Parcelable {
     }
     @Override
     public String toString() {
-        return name;
+        return ("KMStand"+ getMileage() + "KMTank"+getKMTank() + "KMNog"+ (getKMTank() - getKMDriven()) );
     }
 
     public boolean isFavorite() { return favorite; }
@@ -177,5 +185,21 @@ public class Car implements Parcelable {
 
     public void setLocalImage(Bitmap localImage) {
         this.localImage = localImage;
+    }
+
+    public double getKMTank() {
+        return KMTank;
+    }
+
+    public void setKMTank(double KMTank) {
+        this.KMTank = KMTank;
+    }
+
+    public double getKMDriven() {
+        return KMDriven;
+    }
+
+    public void setKMDriven(double KMDriven) {
+        this.KMDriven = KMDriven;
     }
 }

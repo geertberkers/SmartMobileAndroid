@@ -3,6 +3,7 @@ package geert.stef.sm.beheerautokm;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -149,6 +150,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
         int id = item.getItemId();
 
         if (id == R.id.action_logOff)  {
+            manager.logOff();
             Intent intent = new Intent(Overview.this, MainActivity.class);
             intent.putExtra("parcel", manager);
             this.startActivity(intent);
@@ -218,6 +220,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
         if (view.getId() == R.id.btnAddRit) {
             Intent intent = new Intent(this, AddRitActivity.class);
             intent.putExtra("parcel", manager);
+            intent.putExtra("car", selectedCar);
             this.startActivity(intent);
         }
     }
@@ -294,7 +297,10 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
                 new AlertDialog.Builder(this)
                         .setTitle("Favorite Car")
                         .setMessage("You must have a favorite car")
-                        .setPositiveButton("OK", (dialog, whichButton) -> {
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
                         }).show();
             }
         }

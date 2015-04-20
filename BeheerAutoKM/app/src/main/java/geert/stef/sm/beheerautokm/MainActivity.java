@@ -61,8 +61,8 @@ public class MainActivity extends ActionBarActivity {
         driverList.add(new Driver("stef", "s", "Stef Philipsen"));
         driverList.add(new Driver("koen", "k", "Koen Meeuws"));
 
-        carList.add(new Car("Peugeot 206", CarBrand.PEUGEOT, R.mipmap.peugeot, 2001, "Benzine", 90, 185000, "XH-FJ-99", driverList.get(0)));
-        carList.add(new Car("Volkswagen Polo", CarBrand.VW, R.mipmap.vw, 2008, "Diesel", 122, 54500, "BL-AB-LA", driverList.get(1)));
+        carList.add(new Car("Peugeot 206", CarBrand.PEUGEOT, R.mipmap.peugeot, 2001, "Benzine", 90, 185000, 600, 300, "XH-FJ-99", driverList.get(0)));
+        carList.add(new Car("Volkswagen Polo", CarBrand.VW, R.mipmap.vw, 2008, "Diesel", 122, 54500, 750, 200, "BL-AB-LA", driverList.get(1)));
 
         carList.get(0).setFavorite(true);
 
@@ -73,7 +73,7 @@ public class MainActivity extends ActionBarActivity {
         manager.setMyInt(1);
         manager.setCars(carList);
         manager.setDrivers(driverList);
-        manager.addCar(new Car("BMW M3", CarBrand.BMW, R.mipmap.bmw, 2014, "LPG", 147, 10000.5, "JA-33-NE", manager.getDrivers().get(2)));
+        manager.addCar(new Car("BMW M3", CarBrand.BMW, R.mipmap.bmw, 2014, "LPG", 147, 10000.5, 700, 560, "JA-33-NE", manager.getDrivers().get(2)));
 
         txtInfo = (TextView) findViewById(R.id.txtInfo);
         txtUsername = (EditText) findViewById(R.id.tbUsername);
@@ -184,7 +184,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onDestroy() {
-        setRemember();
         super.onDestroy();
+        setRemember();
     }
 }

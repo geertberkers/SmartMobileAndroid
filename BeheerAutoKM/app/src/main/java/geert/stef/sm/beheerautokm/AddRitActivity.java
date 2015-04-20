@@ -3,14 +3,16 @@ package geert.stef.sm.beheerautokm;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,13 +23,24 @@ import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 
-public class AddRitActivity extends ActionBarActivity {
+public class AddRitActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
 
     Manager manager;
-    Spinner s;
-    String[] carSpinner;
-    EditText txtDistance;
+    Spinner spinner;
+    Car selectedCar;
+    // EditText txtDistance;
     ArrayList<Rit> ritten;
+
+    private String[] carSpinner;
+    TextView txtKMStand;
+    TextView txtKMTank;
+    TextView txtKMNog;
+    EditText txtKMBegin;
+    EditText txtKMEind;
+    EditText txtKMTotaal;
+
+    private SpinAdapter myAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +49,29 @@ public class AddRitActivity extends ActionBarActivity {
 
         Bundle b = getIntent().getExtras();
         manager = b.getParcelable("parcel");
+        selectedCar = b.getParcelable("car");
 
-        txtDistance = (EditText) findViewById(R.id.txtDistance);
-        s = (Spinner) findViewById(R.id.spinner_cars);
+        txtKMStand = (TextView) findViewById(R.id.txtKMStandValue);
+        txtKMTank = (TextView) findViewById(R.id.txtKMTankValue);
+        txtKMNog = (TextView) findViewById(R.id.txtKMToDriveValue);
+        txtKMBegin = (EditText) findViewById(R.id.txtDistanceBegin);
+        txtKMEind = (EditText) findViewById(R.id.txtDistanceEnd);
+        txtKMTotaal = (EditText) findViewById(R.id.txtDistance);
 
-        String[] carSpinner = new String[manager.getCars().size()];
+        //    txtDistance = (EditText) findViewById(R.id.txtDistance);
+        spinner = (Spinner) findViewById(R.id.spinner_cars);
 
-        for(int i = 0; i < manager.getCars().size(); i++) {
+        carSpinner = new String[manager.getCars().size()];
+
+        for (int i = 0; i < manager.getCars().size(); i++) {
             carSpinner[i] = manager.getCars().get(i).getCar();
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, carSpinner);
-        s.setAdapter(adapter);
+
+        // ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, carSpinner);
+
+        myAdapter = new SpinAdapter(this, R.layout.spinner_row, manager.getCars());
+        spinner.setAdapter(myAdapter);
+        spinner.setOnItemSelectedListener(this);
     }
 
 
@@ -65,7 +90,8 @@ public class AddRitActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_logOff)  {
+        if (id == R.id.action_logOff) {
+            manager.logOff();
             Intent intent = new Intent(AddRitActivity.this, MainActivity.class);
             intent.putExtra("parcel", manager);
             this.startActivity(intent);
@@ -76,35 +102,32 @@ public class AddRitActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void addRit(View view) {
-        String name = s.getSelectedItem().toString();
-        Car car = null;
+    public void addRitBeginEind(View view) {
 
-        for(Car c : manager.getCars())
-        {
-            if(c.getCar().equals(name))
-            {
-                car = c;
-            }
-        }
-
-        Double distance = 0.00;
         try {
-            if (tryParseDouble(txtDistance.getText().toString())) {
-                distance = Double.parseDouble(txtDistance.getText().toString());
-                new AddRitTask().execute(distance, 1, 1);
-                txtDistance.setText("");
-                showAddedDialog();
-            }
+            String begin = txtKMBegin.getText().toString();
+            String eind = txtKMEind.getText().toString();
+
+            Double beginDouble = Double.parseDouble(begin);
+            Double eindDouble = Double.parseDouble(eind);
+
+            Double distance = eindDouble - beginDouble;
+
+            AsyncTask execute = new AddRitTask();
+            //FAILS
+            execute.execute(distance.toString(), selectedCar.getLicensePlate(), manager.getLoggedIn().getUsername());
+            txtKMBegin.setText("");
+            txtKMEind.setText("");
+            showAddedDialog();
+            //    }
         } catch (Exception e) {
             System.out.println("Convert to double failed.");
         }
         //Car moet nog een ID hebben, dus moet ook met Parcelable geimplementeerd worden, 1 is testwaarde.
-        //dc.addRit(distance, 1);
-
+        //dc.addRit(distance, 1)
     }
 
-    boolean tryParseDouble(String value) {
+    public boolean tryParseDouble(String value) {
         try {
             Double.parseDouble(value);
             return true;
@@ -113,6 +136,18 @@ public class AddRitActivity extends ActionBarActivity {
             return false;
         }
     }
+
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        selectedCar = myAdapter.getItem(pos);
+        txtKMStand.setText(String.valueOf(selectedCar.getMileage()));
+        txtKMTank.setText(String.valueOf(selectedCar.getKMTank()));
+        txtKMNog.setText(String.valueOf(selectedCar.getKMTank() - selectedCar.getKMDriven()));
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    }
+
 
     public void showNotValidNumberDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -125,13 +160,6 @@ public class AddRitActivity extends ActionBarActivity {
                         //do some thing here which you need
                     }
                 });
-        /*builder.setNegativeButton("No", new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int which)
-            {
-                dialog.dismiss();
-            }
-        });*/
         AlertDialog alert = builder.create();
         alert.show();
     }
@@ -172,15 +200,12 @@ public class AddRitActivity extends ActionBarActivity {
         parseJson(json);
     }
 
-    public void parseJson(String json)
-    {
+    public void parseJson(String json) {
         ritten = new ArrayList<>();
         try {
-//            JSONObject jObject = new JSONObject(json);
-            JSONArray jArray =  new JSONArray(json);
+            JSONArray jArray = new JSONArray(json);
 
-            for (int i=0; i < jArray.length(); i++)
-            {
+            for (int i = 0; i < jArray.length(); i++) {
                 try {
                     JSONObject oneObject = jArray.getJSONObject(i);
                     // Pulling items from the array
@@ -189,11 +214,11 @@ public class AddRitActivity extends ActionBarActivity {
                     double distance = oneObject.getDouble("Distance");
                     String driver = oneObject.getString("Driver");
 
-                    int year = Integer.parseInt(oneObject.getString("Datum").substring(0,4));
-                    int month = Integer.parseInt(oneObject.getString("Datum").substring(5,7));
-                    int day = Integer.parseInt(oneObject.getString("Datum").substring(8,10));
+                    int year = Integer.parseInt(oneObject.getString("Datum").substring(0, 4));
+                    int month = Integer.parseInt(oneObject.getString("Datum").substring(5, 7));
+                    int day = Integer.parseInt(oneObject.getString("Datum").substring(8, 10));
 
-                    Date date = new Date(year,month, day);
+                    Date date = new Date(year, month, day);
                     System.out.println(date.toString());
                     ritten.add(new Rit(ritID, car, distance, driver));
                 } catch (JSONException e) {
@@ -212,3 +237,4 @@ public class AddRitActivity extends ActionBarActivity {
         finish();
     }
 }
+

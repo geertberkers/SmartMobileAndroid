@@ -1,47 +1,199 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@color/background"
     tools:context="geert.stef.sm.beheerautokm.AddRitActivity">
 
-    <Spinner
-        android:id="@+id/spinner_cars"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/txtDistance"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner_cars"
-        android:inputType="phone"
-        style="@style/textFieldStyle"/>
-    <Button
-        android:id="@+id/btnAddRit"
+    <TableLayout
+        android:id="@+id/tbInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/addRit"
-        android:layout_below="@+id/txtDistance"
-        android:onClick="addRit"
-        style="@style/centerStyle"/>
-    <Button
-        android:id="@+id/btnGetRitten"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get ritten"
-        android:layout_below="@id/btnAddRit"
-        android:onClick="getRitten"
-        style="@style/centerStyle"/>
+        android:layout_centerHorizontal="true">
 
-    <Button
-        android:id="@+id/btnTrackRit"
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Car:"
+                android:id="@+id/txtCar" />
+
+            <Spinner
+                style="@style/spinnerStyle"
+                android:id="@+id/spinner_cars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Kilometerstand:"
+                android:id="@+id/txtKMstand" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="99.999,9"
+                android:id="@+id/txtKMStandValue" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Deze tank:"
+                android:id="@+id/txtKMTank" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="200"
+                android:id="@+id/txtKMTankValue" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nog:"
+                android:id="@+id/txtKMToDrive" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="300"
+                android:id="@+id/txtKMToDriveValue" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_span="2"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Invoer:" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="KM Beginstand rit:" />
+
+            <EditText
+                android:id="@+id/txtDistanceBegin"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="KM Eindstand rit:" />
+
+            <EditText
+                android:id="@+id/txtDistanceEnd"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Of:" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Gereden KM:" />
+
+            <EditText
+                android:id="@+id/txtDistance"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone" />
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/track"
-        android:layout_below="@id/btnGetRitten"
-        android:onClick="trackLocation"
-        style="@style/centerStyle"/>
+        android:layout_below="@+id/tbInfo"
+        android:layout_centerHorizontal="true">
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/btnAddRit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addRit"
+                android:onClick="addRitBeginEind"
+                android:layout_weight="0.5" />
+
+            <Button
+                android:id="@+id/btnAddRitKM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addRitTotaal"
+                android:onClick="addRitKM"
+                android:layout_weight="0.5" />
+            </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/btnGetRitten"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get ritten"
+                android:onClick="getRitten"
+                android:layout_weight="0.5" />
+
+            <Button
+                android:id="@+id/btnTrackRit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/track"
+                android:onClick="trackLocation"
+                android:layout_weight="0.5" />
+        </TableRow>
+
+    </TableLayout>
+
 
 </RelativeLayout>
