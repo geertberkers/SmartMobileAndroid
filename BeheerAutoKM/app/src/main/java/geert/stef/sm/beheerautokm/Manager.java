@@ -137,6 +137,8 @@ public class Manager implements Parcelable {
     public void addCar(Car car) {
         if (car != null) {
             this.cars.add(car);
+            //TODO
+            //IN DATABASE AANMAKEN
         }
     }
 

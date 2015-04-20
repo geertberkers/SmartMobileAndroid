@@ -3,14 +3,215 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    >
+    android:background="@color/background">
 
-    <TextView
-        style="@style/textStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Large Text"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+
+            <TextView
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Merk"
+                android:id="@+id/txtBrand" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtBrandValue"
+                android:layout_weight="0.5"
+                android:text="BMW" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Model"
+                android:id="@+id/txtModel"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtModelValue"
+                android:layout_weight="0.5"
+                android:text="M3" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Year"
+                android:id="@+id/txtYear"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtYearValue"
+                android:layout_weight="0.5"
+                android:text="2012" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Model"
+                android:id="@+id/txtFuel"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtFuelValue"
+                android:layout_weight="0.5"
+                android:text="Benzine" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HP"
+                android:id="@+id/txtHP"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtHPValue"
+                android:layout_weight="0.5"
+                android:text="122" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Model"
+                android:id="@+id/txtKMstand"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtKMStandValue"
+                android:layout_weight="0.5"
+                android:text="5000" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Model"
+                android:id="@+id/txtKMTank"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtKMTankValue"
+                android:layout_weight="0.5"
+                android:text="500" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Model"
+                android:id="@+id/txtKMToDrive"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtKMToDriveValue"
+                android:layout_weight="0.5"
+                android:text="500" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Model"
+                android:id="@+id/txtLicenseplate"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtLicenseplateValue"
+                android:layout_weight="0.5"
+                android:text="500" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Model"
+                android:id="@+id/txtOwner" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtOwnerValue"
+                android:layout_weight="0.5"
+                android:text="Geert" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Car"
+                android:id="@+id/button"
+                android:layout_span="2"
+                android:layout_weight="1"
+                android:onClick="addCar"/>
+        </TableRow>
+    </TableLayout>
+
+
+
+    <!-- Numeric-->
+
+
 </LinearLayout>

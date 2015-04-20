@@ -3,9 +3,9 @@
     <string name="namePerson">Test user</string>
     <string name="action_logOff">Log uit</string>
     <string name="title_activity_overview">Overview</string>
-    <string name="title_activity_add_rit">AddRitActivity</string>
-    <string name="title_activity_history">HistoryActivity</string>
-    <string name="title_activity_addcar">AddCarActivity</string>
+    <string name="title_activity_add_rit">Add rit</string>
+    <string name="title_activity_history">History</string>
+    <string name="title_activity_addcar">Add Car</string>
     <string name="passwordValue">Password</string>
     <string name="usernameValue">Username</string>
     <string name="password">Password:</string>
@@ -42,7 +42,7 @@
     <string name="favCar">Favorite Car</string>
     <string name="addCar">Add Car</string>
     <string name="selectedCar">Selected Car</string>
-    <string name="title_activity_location">LocationActivity</string>
+    <string name="title_activity_location">Locatie</string>
     <string name="track">Track location</string>
     <string name="otherImage">Add other image</string>
     <string name="rememberMe">Remember me</string>

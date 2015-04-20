@@ -238,6 +238,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
             Intent intent = new Intent(Overview.this, AddCar.class);
             intent.putExtra("parcel", manager);
             this.startActivity(intent);
+            this.finish();
         }
     }
 
