@@ -7,12 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 /**
  * Created by Geert on 15-4-2015.
  */
-public class AddCar extends ActionBarActivity {
+public class AddCarActivity extends ActionBarActivity {
 
     private Manager manager;
     private EditText txtBrand;
@@ -57,7 +56,7 @@ public class AddCar extends ActionBarActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_logOff)  {
-            Intent intent = new Intent(AddCar.this, MainActivity.class);
+            Intent intent = new Intent(AddCarActivity.this, MainActivity.class);
             intent.putExtra("parcel", manager);
             this.startActivity(intent);
             this.finish();
@@ -81,12 +80,13 @@ public class AddCar extends ActionBarActivity {
         String licenseplate = txtLicensePlate.getText().toString();
 
         int pic = 0;
-        switch(brand){
-            case "Opel": carBrand = CarBrand.OPEL; pic = R.mipmap.opel; break;
-            case "Peugeot": carBrand = CarBrand.PEUGEOT;pic = R.mipmap.peugeot; break;
-            case "Audi": carBrand = CarBrand.AUDI;pic = R.mipmap.audi; break;
-            case "BMW": carBrand = CarBrand.BMW; pic = R.mipmap.bmw; break;
-            case "VW": carBrand = CarBrand.VW; pic = R.mipmap.vw; break;
+        switch(brand.toLowerCase()){
+            case "opel": carBrand = CarBrand.OPEL; pic = R.mipmap.opel; break;
+            case "peugeot": carBrand = CarBrand.PEUGEOT; pic = R.mipmap.peugeot; break;
+            case "audi": carBrand = CarBrand.AUDI; pic = R.mipmap.audi; break;
+            case "bmw": carBrand = CarBrand.BMW; pic = R.mipmap.bmw; break;
+            case "vw": carBrand = CarBrand.VW; pic = R.mipmap.vw; break;
+            case "volkswagen": carBrand = CarBrand.VW; pic = R.mipmap.vw; break;
         }
 
         Driver driver = null;
@@ -96,12 +96,11 @@ public class AddCar extends ActionBarActivity {
             }
         }
         newCar = new Car(car,carBrand,pic,year,fuel,hp,mileage,kmtank,kmleft,licenseplate,driver);
-        // manager.addCar(new Car("Volkswagen Polo", CarBrand.VW, R.mipmap.vw, 2008, "Diesel", 122, 54500, 750, 200, "BL-AB-LA", driverList.get(1)));
 
         manager.addCar(newCar);
 
         System.out.println("Added");
-        Intent intent = new Intent(AddCar.this, Overview.class);
+        Intent intent = new Intent(AddCarActivity.this, Overview.class);
         intent.putExtra("parcel", manager);
         this.startActivity(intent);
         finish();

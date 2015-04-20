@@ -57,8 +57,6 @@ public class AddRitActivity extends ActionBarActivity implements AdapterView.OnI
         txtKMBegin = (EditText) findViewById(R.id.txtDistanceBegin);
         txtKMEind = (EditText) findViewById(R.id.txtDistanceEnd);
         txtKMTotaal = (EditText) findViewById(R.id.txtDistance);
-
-        //    txtDistance = (EditText) findViewById(R.id.txtDistance);
         spinner = (Spinner) findViewById(R.id.spinner_cars);
 
         carSpinner = new String[manager.getCars().size()];
@@ -67,7 +65,6 @@ public class AddRitActivity extends ActionBarActivity implements AdapterView.OnI
             carSpinner[i] = manager.getCars().get(i).getCar();
         }
 
-        // ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, carSpinner);
 
         myAdapter = new SpinAdapter(this, R.layout.spinner_row, manager.getCars());
         spinner.setAdapter(myAdapter);
@@ -84,12 +81,8 @@ public class AddRitActivity extends ActionBarActivity implements AdapterView.OnI
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_logOff) {
             manager.logOff();
             Intent intent = new Intent(AddRitActivity.this, MainActivity.class);
