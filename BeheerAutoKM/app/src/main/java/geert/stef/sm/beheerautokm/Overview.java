@@ -228,7 +228,8 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
     public void historyOnClick(View view) {
         if (view.getId() == R.id.btnHistory) {
             Intent intent = new Intent(this, HistoryActivity.class);
-            intent.putExtra("parcel",manager);
+            intent.putExtra("parcel", manager);
+            intent.putExtra("car", this.selectedCar);
             this.startActivity(intent);
         }
     }

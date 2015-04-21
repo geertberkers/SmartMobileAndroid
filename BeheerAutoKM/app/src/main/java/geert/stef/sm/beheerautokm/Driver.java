@@ -26,7 +26,7 @@ public class Driver implements Parcelable {
 
     public Driver(String username)
     {
-        this.username = name;
+        this.username = username;
     }
     public String getName() {
         return name;

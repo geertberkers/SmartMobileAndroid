@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -71,7 +72,13 @@ public class AddRitActivity extends ActionBarActivity implements AdapterView.OnI
 
         myAdapter = new SpinAdapter(this, R.layout.spinner_row, manager.getCars());
         spinner.setAdapter(myAdapter);
+        //spinner.setSelection(myAdapter.getPosition(selectedCar), true);
+        spinner.setSelection(((ArrayAdapter)spinner.getAdapter()).getPosition(selectedCar.getCar()), true);
         spinner.setOnItemSelectedListener(this);
+
+        //carSpinner.setSelection(myAdapter.getPosition(selectedCar), true);
+        //carSpinner.setSelection(manager.getCars().get(3));
+        //carSpinner.setSelection(0, true);
     }
 
 

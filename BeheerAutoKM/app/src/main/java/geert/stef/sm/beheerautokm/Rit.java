@@ -69,4 +69,24 @@ public class Rit implements Parcelable {
         //arg0.writeDate...
     }
 
+    public String getCar()
+    {
+        return this.car;
+    }
+
+    public double getDistance()
+    {
+        return this.distance;
+    }
+
+    public Driver getDriver()
+    {
+        return this.driver;
+    }
+
+    public Date getDate()
+    {
+        return this.date;
+    }
+
 }

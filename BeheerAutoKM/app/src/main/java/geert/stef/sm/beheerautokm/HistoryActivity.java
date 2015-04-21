@@ -5,11 +5,26 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 
 public class HistoryActivity extends ActionBarActivity {
 
     Manager manager;
+    Car selectedCar = null;
+    ArrayList<Rit> ritten;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +33,34 @@ public class HistoryActivity extends ActionBarActivity {
 
         Bundle b = getIntent().getExtras();
         manager = b.getParcelable("parcel");
+        selectedCar = b.getParcelable("car");
+        ritten = new ArrayList<>();
+        this.getRitten();
+        TableLayout tl = (TableLayout) findViewById(R.id.tbl_history);
+
+        for(Rit r : ritten)
+        {
+            if(r.getCar().equals(selectedCar.getLicensePlate()))
+            {
+                TableRow tr = new TableRow(this);
+                tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+
+                //TextView date = new TextView(this);
+                //date.setText(r.getDate().toString());
+
+                TextView txDriver = new TextView(this);
+                txDriver.setText(r.getDriver().getUsername());
+
+                TextView txDistance = new TextView(this);
+                txDistance.setText(String.valueOf(r.getDistance()));
+
+                txDriver.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tr.addView(txDriver);
+                tr.addView(txDistance);
+                tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+            }
+        }
+
     }
 
 
@@ -45,5 +88,49 @@ public class HistoryActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void getRitten() {
+        GetRittenTask grTask = new GetRittenTask();
+        //grTask.execute();
+        String json = null;
+        try {
+            json = grTask.execute().get().toString();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        parseJson(json);
+    }
+
+    public void parseJson(String json) {
+        ritten = new ArrayList<>();
+        try {
+            JSONArray jArray = new JSONArray(json);
+
+            for (int i = 0; i < jArray.length(); i++) {
+                try {
+                    JSONObject oneObject = jArray.getJSONObject(i);
+                    // Pulling items from the array
+                    int ritID = oneObject.getInt("RitID");
+                    String car = oneObject.getString("Car");
+                    double distance = oneObject.getDouble("Distance");
+                    String driver = oneObject.getString("Driver");
+                    int year = Integer.parseInt(oneObject.getString("Datum").substring(0, 4));
+                    int month = Integer.parseInt(oneObject.getString("Datum").substring(5, 7));
+                    int day = Integer.parseInt(oneObject.getString("Datum").substring(8, 10));
+
+                    Date date = new Date(year, month, day);
+                    System.out.println(date.toString());
+                    ritten.add(new Rit(ritID, car, distance, driver));
+                } catch (JSONException e) {
+                    // Oops
+
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
