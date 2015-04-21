@@ -13,13 +13,13 @@ import java.util.List;
 /**
  * Created by Geert on 13-4-2015.
  */
-public class MyAdapter extends BaseAdapter {
+public class MenuAdapter extends BaseAdapter {
     private Context context;
 
     private List<Car> carList = new ArrayList<>();
     public void  setCarList(List<Car> carList){ this.carList = carList; notifyDataSetChanged();}
 
-    public MyAdapter(Context context, List<Car> carList){
+    public MenuAdapter(Context context, List<Car> carList){
         this.context = context;
         this.carList = carList;
     }

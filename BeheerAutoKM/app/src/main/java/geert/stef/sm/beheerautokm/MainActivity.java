@@ -16,7 +16,12 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -66,14 +71,32 @@ public class MainActivity extends ActionBarActivity {
 
         carList.get(0).setFavorite(true);
 
-        ritList.add(new Rit(1, "XH-FJ-99", 12.12, "Henk"));
-        ritList.add(new Rit(1, "AA-11-BB", 12.12, "Stef"));
-
         manager = new Manager();
         manager.setMyInt(1);
         manager.setCars(carList);
         manager.setDrivers(driverList);
         manager.addCar(new Car("BMW M3", CarBrand.BMW, R.mipmap.bmw, 2014, "LPG", 147, 10000.5, 700, 560, "JA-33-NE", manager.getDrivers().get(2)));
+
+        String _Date = "2010-09-29 08:45:22";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+        Date date = parseDate("12-12-2012");
+        manager.addRit(1, "XH-FJ-99", 12.12, "geert", date);
+        manager.addRit(2, "AA-11-BB", 12.12, "stef", date);
+        /*
+        try {
+            date = sdf.parse(_Date);
+            System.out.println(date.toString());
+        }
+        catch(ParseException pe) {
+            date = new Date();
+            System.out.println(date.toString());
+        }
+        finally {
+            manager.addRit(1, "XH-FJ-99", 12.12, "geert", date);
+            manager.addRit(2, "AA-11-BB", 12.12, "stef", date);
+        }*/
+
 
         txtInfo = (TextView) findViewById(R.id.txtInfo);
         txtUsername = (EditText) findViewById(R.id.tbUsername);
@@ -102,6 +125,13 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("dd-mm-yyyy").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
 
     public void cbRememberPressed(View view) {
         if (view.getId() == R.id.cbRemember) {

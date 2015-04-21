@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -17,10 +18,12 @@ public class Manager implements Parcelable {
     private Driver loggedIn;
     private List<Car> cars;
     private List<Driver> drivers;
+    private List<Rit> ritten;
 
     public Manager() {
         cars = new ArrayList<>();
         drivers = new ArrayList<>();
+        ritten = new ArrayList<>();
     }
 
     public List<Car> getCars() {
@@ -51,9 +54,12 @@ public class Manager implements Parcelable {
         myInt = in.readInt();
         cars = new ArrayList<>();
         drivers = new ArrayList<>();
+        ritten = new ArrayList<>();
         in.readTypedList(cars, Car.CREATOR);
         in.readTypedList(drivers, Driver.CREATOR);
-        loggedIn = (Driver) in.readParcelable(Driver.class.getClassLoader());
+        in.readTypedList(ritten, Rit.CREATOR);
+        loggedIn =in.readParcelable(getClass().getClassLoader());
+        //loggedIn = in.readParcelable( Driver.class.getClassLoader());
     }
 
     public Driver Login(String username, String password) {
@@ -119,6 +125,7 @@ public class Manager implements Parcelable {
         outParcel.writeInt(myInt);
         outParcel.writeTypedList(cars);
         outParcel.writeTypedList(drivers);
+        outParcel.writeTypedList(ritten);
         outParcel.writeParcelable(loggedIn, flags);
     }
 
@@ -154,5 +161,21 @@ public class Manager implements Parcelable {
 
     public void logOff() {
         this.loggedIn = null;
+    }
+
+    public List<Rit> getRitten() {
+        return ritten;
+    }
+
+    public void setRitten(List<Rit> ritten) {
+        this.ritten = ritten;
+    }
+
+    public void addRit(int ritID, String carID, double distance, String driver, Date date){
+      //  for(Driver d : drivers){
+      //      if(d.getUsername().equals(driver)){
+                ritten.add(new Rit(ritID, carID, distance, driver, date));
+      //      }
+      //  }
     }
 }
