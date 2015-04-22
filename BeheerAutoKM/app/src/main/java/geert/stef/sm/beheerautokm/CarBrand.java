@@ -9,12 +9,13 @@ public enum CarBrand {
     BMW("Male", 1),
     OPEL("Opel",2),
     PEUGEOT("Peugeot",3),
-    VW("Volkswagen", 4);
+    VW("Volkswagen", 4),
+    UNKNOWN("Unknown", 5);
 
     private String stringValue;
     private int intValue;
 
-    private CarBrand(String toString, int value) {
+    CarBrand(String toString, int value) {
         stringValue = toString;
         intValue = value;
     }

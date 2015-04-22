@@ -94,6 +94,7 @@ public class AddCarActivity extends ActionBarActivity {
             case "bmw": carBrand = CarBrand.BMW; pic = R.mipmap.bmw; break;
             case "vw": carBrand = CarBrand.VW; pic = R.mipmap.vw; break;
             case "volkswagen": carBrand = CarBrand.VW; pic = R.mipmap.vw; break;
+            default: carBrand = carBrand.UNKNOWN; pic = R.mipmap.ic_launcher; break;
         }
 
         Driver driver = null;
