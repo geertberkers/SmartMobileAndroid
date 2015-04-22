@@ -18,9 +18,13 @@ public class RitListAdapter extends BaseAdapter {
     private Context context;
 
     private List<Rit> ritList = new ArrayList<>();
-    public void  setRitList(List<Rit> ritList){ this.ritList = ritList; notifyDataSetChanged();}
 
-    public RitListAdapter(Context context, List<Rit> ritList){
+    public void setRitList(List<Rit> ritList) {
+        this.ritList = ritList;
+        notifyDataSetChanged();
+    }
+
+    public RitListAdapter(Context context, List<Rit> ritList) {
         this.context = context;
         this.ritList = ritList;
     }
@@ -43,13 +47,10 @@ public class RitListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row;
-        if(convertView == null)
-        {
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(R.layout.rit_layout, parent, false);
-        }
-        else
-        {
+        } else {
             row = convertView;
         }
 
@@ -57,16 +58,26 @@ public class RitListAdapter extends BaseAdapter {
         TextView car = (TextView) row.findViewById(R.id.txtCar);
         TextView distance = (TextView) row.findViewById(R.id.txtDistance);
         TextView date = (TextView) row.findViewById(R.id.txtDate);
+        driver.setPadding(0, 0, 20, 0);
+        car.setPadding(0, 0, 20, 0);
+        distance.setPadding(0, 0, 20, 0);
+        date.setPadding(0, 0, 20, 0);
+
+        if ((position % 2) == 0) {
+            row.setBackgroundResource(R.color.lightblue);
+        } else{
+            row.setBackgroundResource(R.color.blue);
+        }
 /*
        for(Rit r: ritList){
            System.out.println(r);
        }
 */
-        driver.setText(ritList.get(position).getDriver().getUsername().toString());
-        car.setText(ritList.get(position).getCar().toString());
-        distance.setText(String.valueOf(ritList.get(position).getDistance()));
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        date.setText(sdf.format(ritList.get(position).getDate()));
-        return row;
+            driver.setText(ritList.get(position).getDriver().getUsername().toString());
+            car.setText(ritList.get(position).getCar().toString());
+            distance.setText(String.valueOf(ritList.get(position).getDistance()));
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            date.setText(sdf.format(ritList.get(position).getDate()));
+            return row;
+        }
     }
-}

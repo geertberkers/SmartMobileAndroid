@@ -114,6 +114,7 @@ public class HistoryActivity extends ActionBarActivity {
                     System.out.println(oneObject.get("Datum"));
                     System.out.println(oneObject.getString("Datum"));
                     String date = oneObject.getString("Datum").substring(0, 10);
+                    String date2 = oneObject.getString("Datum");
                     /*
                     int year = Integer.parseInt(oneObject.getString("Datum").substring(0, 4));
                     int month = Integer.parseInt(oneObject.getString("Datum").substring(5, 7));
@@ -121,7 +122,8 @@ public class HistoryActivity extends ActionBarActivity {
 
                     Date date = new Date(year, month, day);
                     System.out.println(date.toString());*/
-                    manager.addRit(ritID, car, distance, driver, parseDate(date));
+
+                    manager.addRit(ritID, car, distance, driver, parseDate(date2));
 //                    ritten.add(new Rit(ritID, car, distance, driver, parseDate(date)));
                 } catch (JSONException e) {
                     // Oops
@@ -135,7 +137,7 @@ public class HistoryActivity extends ActionBarActivity {
 
     public static Date parseDate(String date) {
         try {
-            return new SimpleDateFormat("dd-MM-yyyy").parse(date);
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
         } catch (ParseException e) {
             return null;
         }
