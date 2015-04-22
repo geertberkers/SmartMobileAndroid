@@ -3,8 +3,18 @@ Smart Mobile Android Project: BeheerAutoKM
 Dit is een project voor SM41 op de Fontys Hogescholen ICT.
 
 Ons idee:
-We maken een applicatie waar gebruikers van een auto alle informatie bij kunnen houden.
-Denk hierbij aan: het tanken, de kilometerstand, rittenregistratie, keuringen & reparaties.
+We maken een applicatie waar gebruikers alle ritten kunnen bijhouden die met een auto gemaakt worden.
+Deze worden met alle gebruikers van de auto gesynchroniseerd zodat iedereen deze info ter beschikking heeft.
+
+
+Dit wordt nog uitgebreid met de mogelijkheid om de gemaakte kosten per auto/per persoon op te geven,
+zodat de kosten eerlijk verdeeld kunnen worden.
+
+De dingen die je in de toekomst nog in de app kunt gaan bijhouden zijn:
+	Tankbeurten
+	Kilometerstand
+	Keuringen
+	Reparaties
 
 TO DO:
  - Experience Design:
