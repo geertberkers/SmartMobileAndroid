@@ -64,9 +64,9 @@ public class RitListAdapter extends BaseAdapter {
         date.setPadding(0, 0, 20, 0);
 
         if ((position % 2) == 0) {
-            row.setBackgroundResource(R.color.lightblue);
+            row.setBackgroundResource(R.color.white);
         } else{
-            row.setBackgroundResource(R.color.blue);
+            row.setBackgroundResource(R.color.transWhite);
         }
 /*
        for(Rit r: ritList){
