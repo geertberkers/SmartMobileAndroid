@@ -168,6 +168,11 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
 
             return true;
         }
+        if (id == R.id.action_about)  {
+            Intent intent = new Intent(Overview.this, AboutActivity.class);
+            intent.putExtra("parcel", manager);
+            this.startActivity(intent);
+        }
 
         if (drawerListener.onOptionsItemSelected(item)) {
             System.out.println("DrawerLister pressed");

@@ -7,14 +7,16 @@ We maken een applicatie waar gebruikers van een auto alle informatie bij kunnen 
 Denk hierbij aan: het tanken, de kilometerstand, rittenregistratie, keuringen & reparaties.
 
 TO DO:
- - Ritten opvragen + weergeven
- - Rit toevoegen
- - About us (Developer)
- - Auto toevogen
- - landscape layout
- - layout verbeteren
- - GPS locatie opvragen + weergeven maps
- - Tankinformatie
+ - Experience Design:
+    - Productbeschrijving
+    - Mening
+ - Rittenlijst GUI	(aanpassen)
+ - About us (Developer) (fixen)
+ - Auto toevogen 	(database only)
+ - landscape layout 	(niet perse)
+ - layout verbeteren 
+ - GPS locatie opvragen + weergeven maps (even kijken)
+ - Tankinformatie	(volgende versie)
     - hoe ver nog
     - wanneer tanken
     - Hoeveel op een tank

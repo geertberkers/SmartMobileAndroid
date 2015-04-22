@@ -62,6 +62,11 @@ public class AddCarActivity extends ActionBarActivity {
             this.finish();
             return true;
         }
+        if (id == R.id.action_about)  {
+            Intent intent = new Intent(AddCarActivity.this, AboutActivity.class);
+            intent.putExtra("parcel", manager);
+            this.startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }

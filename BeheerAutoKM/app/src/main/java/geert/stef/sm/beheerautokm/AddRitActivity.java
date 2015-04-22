@@ -101,6 +101,12 @@ public class AddRitActivity extends ActionBarActivity implements AdapterView.OnI
             return true;
         }
 
+        if (id == R.id.action_about)  {
+            Intent intent = new Intent(AddRitActivity.this, AboutActivity.class);
+            intent.putExtra("parcel", manager);
+            this.startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

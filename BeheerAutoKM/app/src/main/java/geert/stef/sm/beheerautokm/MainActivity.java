@@ -151,11 +151,10 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_about) {
-            System.out.println("About pressed");
-            // TODO HANDLE EVENT
-            // POPUP OR ACTIVITY WITH INFORMATOUS ABOUT US
-            return true;
+        if (id == R.id.action_about)  {
+            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+            intent.putExtra("parcel", manager);
+            this.startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
