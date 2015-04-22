@@ -53,5 +53,6 @@
     <string name="logInFailed"><b>Inloggen mislukt!</b></string>
     <string name="todo">...</string>
     <string name="idee">Het idee is...</string>
+    <string name="title_activity_about_activity">About us</string>
 
 </resources>
