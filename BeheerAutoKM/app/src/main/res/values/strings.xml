@@ -51,5 +51,7 @@
     <string name="deletePhotos">Delete foto\'s</string>
     <string name="location">location</string>
     <string name="logInFailed"><b>Inloggen mislukt!</b></string>
+    <string name="todo">...</string>
+    <string name="idee">Het idee is...</string>
 
 </resources>

@@ -19,6 +19,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
@@ -58,8 +60,6 @@ public class AddRitActivity extends ActionBarActivity implements AdapterView.OnI
         txtKMBegin = (EditText) findViewById(R.id.txtDistanceBegin);
         txtKMEind = (EditText) findViewById(R.id.txtDistanceEnd);
         txtKMTotaal = (EditText) findViewById(R.id.txtDistance);
-
-        //    txtDistance = (EditText) findViewById(R.id.txtDistance);
         spinner = (Spinner) findViewById(R.id.spinner_cars);
 
         carSpinner = new String[manager.getCars().size()];
@@ -68,17 +68,16 @@ public class AddRitActivity extends ActionBarActivity implements AdapterView.OnI
             carSpinner[i] = manager.getCars().get(i).getCar();
         }
 
-        // ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, carSpinner);
 
         myAdapter = new SpinAdapter(this, R.layout.spinner_row, manager.getCars());
         spinner.setAdapter(myAdapter);
         //spinner.setSelection(myAdapter.getPosition(selectedCar), true);
-        spinner.setSelection(((ArrayAdapter)spinner.getAdapter()).getPosition(selectedCar.getCar()), true);
+        spinner.setSelection(((SpinAdapter)spinner.getAdapter()).getPosition(selectedCar));
         spinner.setOnItemSelectedListener(this);
 
-        //carSpinner.setSelection(myAdapter.getPosition(selectedCar), true);
-        //carSpinner.setSelection(manager.getCars().get(3));
-        //carSpinner.setSelection(0, true);
+        //spinner.setSelection(myAdapter.getPosition(selectedCar), true);
+        //spinner.setSelection(manager.getCars().get(3));
+        //spinner.setSelection(0, true);
     }
 
 
@@ -91,12 +90,8 @@ public class AddRitActivity extends ActionBarActivity implements AdapterView.OnI
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_logOff) {
             manager.logOff();
             Intent intent = new Intent(AddRitActivity.this, MainActivity.class);
@@ -236,13 +231,16 @@ public class AddRitActivity extends ActionBarActivity implements AdapterView.OnI
                     String car = oneObject.getString("Car");
                     double distance = oneObject.getDouble("Distance");
                     String driver = oneObject.getString("Driver");
+                    String date = oneObject.getString("Datum");
+                    /*
                     int year = Integer.parseInt(oneObject.getString("Datum").substring(0, 4));
                     int month = Integer.parseInt(oneObject.getString("Datum").substring(5, 7));
                     int day = Integer.parseInt(oneObject.getString("Datum").substring(8, 10));
 
                     Date date = new Date(year, month, day);
-                    System.out.println(date.toString());
-                    ritten.add(new Rit(ritID, car, distance, driver));
+                    System.out.println(date.toString());*/
+                    manager.addRit(ritID, car, distance,driver, parseDate(date));
+//                    ritten.add(new Rit(ritID, car, distance, driver, parseDate(date)));
                 } catch (JSONException e) {
                     // Oops
 
@@ -257,6 +255,14 @@ public class AddRitActivity extends ActionBarActivity implements AdapterView.OnI
         Intent intent = new Intent(this, LocationActivity.class);
         this.startActivity(intent);
         finish();
+    }
+
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("dd-mm-yyyy").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 }
 

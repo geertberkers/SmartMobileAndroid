@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
     android:background="@color/background">
 
     <TableLayout
@@ -35,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="Model"
                 android:id="@+id/txtModel"
-                android:layout_gravity="center_horizontal" />
+        />
 
             <EditText
                 android:layout_width="match_parent"
@@ -53,8 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Year"
-                android:id="@+id/txtYear"
-                android:layout_gravity="center_horizontal" />
+                android:id="@+id/txtYear" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -72,8 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Model"
-                android:id="@+id/txtFuel"
-                android:layout_gravity="center_horizontal" />
+                android:id="@+id/txtFuel" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -91,8 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HP"
-                android:id="@+id/txtHP"
-                android:layout_gravity="center_horizontal" />
+                android:id="@+id/txtHP" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -109,9 +107,8 @@
                 style="@style/textStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Model"
-                android:id="@+id/txtKMstand"
-                android:layout_gravity="center_horizontal" />
+                android:text="KM Stand"
+                android:id="@+id/txtKMstand" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -128,9 +125,8 @@
                 style="@style/textStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Model"
-                android:id="@+id/txtKMTank"
-                android:layout_gravity="center_horizontal" />
+                android:text="KM Tank"
+                android:id="@+id/txtKMTank" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -147,9 +143,8 @@
                 style="@style/textStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Model"
-                android:id="@+id/txtKMToDrive"
-                android:layout_gravity="center_horizontal" />
+                android:text="KM Left"
+                android:id="@+id/txtKMToDrive" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -166,9 +161,8 @@
                 style="@style/textStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Model"
-                android:id="@+id/txtLicenseplate"
-                android:layout_gravity="center_horizontal" />
+                android:text="Kenteken"
+                android:id="@+id/txtLicenseplate" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -185,7 +179,7 @@
                 style="@style/textStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Model"
+                android:text="Driver"
                 android:id="@+id/txtOwner" />
 
             <EditText
@@ -193,7 +187,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtOwnerValue"
                 android:layout_weight="0.5"
-                android:text="Geert" />
+                android:text="geert" />
 
         </TableRow>
         <TableRow>

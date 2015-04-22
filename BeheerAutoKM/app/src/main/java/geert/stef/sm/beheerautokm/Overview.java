@@ -41,7 +41,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
     private DrawerLayout drawerLayout;
     private LinearLayout linearLayout;
 
-    private MyAdapter myAdapter;
+    private MenuAdapter menuAdapter;
     private ActionBarDrawerToggle drawerListener;
 
     private TextView tvCar;
@@ -89,9 +89,9 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         listView = (ListView) findViewById(R.id.drawerList);
 
-        myAdapter = new MyAdapter(this.getApplicationContext(), manager.getCars());
+        menuAdapter = new MenuAdapter(this.getApplicationContext(), manager.getCars());
 
-        listView.setAdapter(myAdapter);
+        listView.setAdapter(menuAdapter);
         listView.setOnItemClickListener(this);
 
         drawerListener = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
@@ -164,7 +164,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
                 manager.getCars().get(i).setLocalImage(null);
                 ivCar.setImageResource(manager.getCars().get(i).getImage());
             }
-            myAdapter.notifyDataSetChanged();
+            menuAdapter.notifyDataSetChanged();
 
             return true;
         }
@@ -181,7 +181,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         drawerListener.onConfigurationChanged(newConfig);
-        listView.setAdapter(myAdapter);
+        listView.setAdapter(menuAdapter);
     }
 
     @Override
@@ -236,7 +236,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
 
     public void addCar(View view) {
         if (view.getId() == R.id.btnAddCar) {
-            Intent intent = new Intent(Overview.this, AddCar.class);
+            Intent intent = new Intent(Overview.this, AddCarActivity.class);
             intent.putExtra("parcel", manager);
             this.startActivity(intent);
             this.finish();
@@ -247,7 +247,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
         listView.setItemChecked(position, true);
 
         for (Car c : manager.getCars()) {
-            if (myAdapter.getItem(position).equals(c)) {
+            if (menuAdapter.getItem(position).equals(c)) {
                 setSelectedCar(c);
                 drawerLayout.closeDrawer(linearLayout);
             }
@@ -293,7 +293,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
                         manager.getCars().get(i).setFavorite(true);
                     }
                 }
-                myAdapter.setCarList(manager.getCars());
+                menuAdapter.setCarList(manager.getCars());
             } else {
                 cbFavorite.setChecked(true);
                 new AlertDialog.Builder(this)

@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="geert.stef.sm.beheerautokm.HistoryActivity">
+    <item
+        android:id="@+id/action_logOff"
+        android:title="@string/action_logOff"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+</menu>

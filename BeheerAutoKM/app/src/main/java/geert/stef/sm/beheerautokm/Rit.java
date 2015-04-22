@@ -3,6 +3,8 @@ package geert.stef.sm.beheerautokm;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -36,7 +38,7 @@ public class Rit implements Parcelable {
         this.car = read.readString();
         this.distance = read.readDouble();
         this.driver = new Driver(read.readString(),read.readString(),read.readString());
-        //this.date = new Date(....);
+        this.date = parseDate(read.readString());
     }
 
     public static final Parcelable.Creator<Rit> CREATOR =
@@ -66,17 +68,31 @@ public class Rit implements Parcelable {
         arg0.writeString(driver.getUsername());
         arg0.writeString(driver.getPassword());
         arg0.writeString(driver.getUsername());
-        //arg0.writeDate...
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        arg0.writeString(sdf.format(date));
+    }
+    public int getRitID() {
+        return ritID;
     }
 
-    public String getCar()
-    {
-        return this.car;
+    public void setRitID(int ritID) {
+        this.ritID = ritID;
     }
 
-    public double getDistance()
-    {
-        return this.distance;
+    public String getCar() {
+        return car;
+    }
+
+    public void setCar(String car) {
+        this.car = car;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
     public Driver getDriver()
@@ -89,4 +105,29 @@ public class Rit implements Parcelable {
         return this.date;
     }
 
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {/*
+        System.out.println(ritID);
+        System.out.println(car);
+        System.out.println(distance);
+        System.out.println(driver);
+        System.out.println(date);*/
+        return super.toString();
+    }
+
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("dd-mm-yyyy").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
 }
