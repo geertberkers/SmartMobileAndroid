@@ -40,6 +40,9 @@
         <activity
             android:name=".AddCarActivity"
             android:label="@string/title_activity_addcar"></activity>
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about_activity"></activity>
     </application>
 
 </manifest>
