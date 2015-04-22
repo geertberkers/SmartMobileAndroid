@@ -194,6 +194,8 @@ public class MainActivity extends ActionBarActivity {
 
     public void createAccount(View view) {
         final EditText input = new EditText(this);
+        final String username = txtUsername.getText().toString();
+        final String password = txtPassword.getText().toString();
         new AlertDialog.Builder(this)
                 .setTitle("Set name:")
                 .setMessage("Name of the driver:")
@@ -201,7 +203,7 @@ public class MainActivity extends ActionBarActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         popupName = input.getText().toString();
-                        manager.Register(txtUsername.getText().toString(), txtPassword.getText().toString(), popupName);
+                        manager.Register(username, password, popupName);
                         logIn();
                     }
                 })

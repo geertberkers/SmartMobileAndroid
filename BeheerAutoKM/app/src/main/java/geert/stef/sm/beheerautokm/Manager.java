@@ -113,6 +113,7 @@ public class Manager implements Parcelable {
 
     public void Register(String username, String password, String name) {
         drivers.add(new Driver(username, password, name));
+        new AddDriverTask().execute(username, password, name);
     }
 
     @Override
