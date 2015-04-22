@@ -174,7 +174,7 @@
                 android:onClick="addRitKM"
                 android:layout_weight="0.5" />
             </TableRow>
-
+<!--
         <TableRow>
             <Button
                 android:id="@+id/btnGetRitten"
@@ -192,7 +192,7 @@
                 android:onClick="trackLocation"
                 android:layout_weight="0.5" />
         </TableRow>
-
+-->
     </TableLayout>
 
 

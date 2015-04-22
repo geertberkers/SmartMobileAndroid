@@ -1,6 +1,7 @@
 package geert.stef.sm.beheerautokm;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -29,6 +30,7 @@ public class AddCarActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addcar);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkblue)));
 
         txtBrand = (EditText) findViewById(R.id.txtBrandValue);
         txtModel = (EditText) findViewById(R.id.txtModelValue);

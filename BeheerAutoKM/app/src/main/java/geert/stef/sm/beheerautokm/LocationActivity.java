@@ -2,6 +2,7 @@ package geert.stef.sm.beheerautokm;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.provider.Settings;
@@ -23,6 +24,7 @@ public class LocationActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkblue)));
 
         Bundle b = getIntent().getExtras();
         manager = b.getParcelable("parcel");
