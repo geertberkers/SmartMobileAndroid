@@ -77,9 +77,15 @@ public class HistoryActivity extends ActionBarActivity {
             }
         }
 */
-
+        ArrayList<Rit> rittenSelectedCar = new ArrayList<>();
+        for(Rit r : manager.getRitten()) {
+            if (r.getCar().equals(selectedCar.getLicensePlate())) {
+                rittenSelectedCar.add(r);
+            }
+        }
         listView = (ListView) findViewById(R.id.lvRit);
-        ritAdapter = new RitListAdapter(this.getApplicationContext(), manager.getRitten());
+        ritAdapter = new RitListAdapter(this.getApplicationContext(), rittenSelectedCar);
+        //ritAdapter = new RitListAdapter(this.getApplicationContext(), manager.getRitten());
 
 
         GetRittenTask grTask = new GetRittenTask();
