@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Driver"
         android:id="@+id/txtDriver"
+        android:layout_weight="0.25"
         />
 
     <TextView
@@ -22,6 +23,7 @@
         android:layout_height="wrap_content"
         android:text="Car"
         android:id="@+id/txtCar"
+        android:layout_weight="0.25"
         />
 
     <TextView
@@ -30,6 +32,7 @@
         android:layout_height="wrap_content"
         android:text="Distance"
         android:id="@+id/txtDistance"
+        android:layout_weight="0.25"
         />
 
     <TextView
@@ -38,5 +41,6 @@
         android:layout_height="wrap_content"
         android:text="Date"
         android:id="@+id/txtDate"
+        android:layout_weight="0.25"
         />
 </LinearLayout>
