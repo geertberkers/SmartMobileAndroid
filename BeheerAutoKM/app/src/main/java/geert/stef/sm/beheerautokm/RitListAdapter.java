@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,23 +57,15 @@ public class RitListAdapter extends BaseAdapter {
         TextView car = (TextView) row.findViewById(R.id.txtCar);
         TextView distance = (TextView) row.findViewById(R.id.txtDistance);
         TextView date = (TextView) row.findViewById(R.id.txtDate);
-        driver.setPadding(0, 0, 20, 0);
-        car.setPadding(0, 0, 20, 0);
-        distance.setPadding(0, 0, 20, 0);
-        date.setPadding(0, 0, 20, 0);
 
         if ((position % 2) == 0) {
             row.setBackgroundResource(R.color.white);
         } else{
             row.setBackgroundResource(R.color.transWhite);
         }
-/*
-       for(Rit r: ritList){
-           System.out.println(r);
-       }
-*/
-            driver.setText(ritList.get(position).getDriver().getUsername().toString());
-            car.setText(ritList.get(position).getCar().toString());
+
+            driver.setText(ritList.get(position).getDriver().getUsername());
+            car.setText(ritList.get(position).getCar());
             distance.setText(String.valueOf(ritList.get(position).getDistance()));
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             date.setText(sdf.format(ritList.get(position).getDate()));
