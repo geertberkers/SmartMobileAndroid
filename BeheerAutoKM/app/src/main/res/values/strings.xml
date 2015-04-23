@@ -39,7 +39,7 @@
     <string name="licenseplate">Kenteken</string>
     <string name="owner">Eigenaar</string>
     <string name="ownerValue">Geert</string>
-    <string name="favCar">Favorite Car</string>
+    <string name="favCar">Favoriet</string>
     <string name="addCar">Add Car</string>
     <string name="selectedCar">Selected Car</string>
     <string name="title_activity_location">Locatie</string>
@@ -54,5 +54,9 @@
     <string name="todo">...</string>
     <string name="idee">Het idee is...</string>
     <string name="title_activity_about_activity">About us</string>
+    <string name="title_activity_history_activity">Ritgeschiedenis</string>
+    <string name="title_activity_location_activity">title_activity_location_activity</string>
+    <string name="newPhoto">Nieuwe foto</string>
+    <string name="existingPhoto">Bestaande foto</string>
 
 </resources>

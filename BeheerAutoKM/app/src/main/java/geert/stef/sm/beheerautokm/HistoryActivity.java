@@ -36,7 +36,6 @@ public class HistoryActivity extends ActionBarActivity {
     Manager manager;
 
     Car selectedCar = null;
-   // ArrayList<Rit> ritten;
 
     private ListView listView;
     private RitListAdapter ritAdapter;
@@ -52,33 +51,8 @@ public class HistoryActivity extends ActionBarActivity {
 
         selectedCar = b.getParcelable("car");
         getSupportActionBar().setTitle(selectedCar.getCar());
-      //  ritten = new ArrayList<>();
         this.getRitten();
-       // TableLayout tl = (TableLayout) findViewById(R.id.tbl_history);
-/*
-        for(Rit r : ritten)
-        {
-            if(r.getCar().equals(selectedCar.getLicensePlate()))
-            {
-                TableRow tr = new TableRow(this);
-                tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-                //TextView date = new TextView(this);
-                //date.setText(r.getDate().toString());
-
-                TextView txDriver = new TextView(this);
-                txDriver.setText(r.getDriver().getUsername());
-
-                TextView txDistance = new TextView(this);
-                txDistance.setText(String.valueOf(r.getDistance()));
-
-                txDriver.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-                tr.addView(txDriver);
-                tr.addView(txDistance);
-                tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            }
-        }
-*/
         ArrayList<Rit> rittenSelectedCar = new ArrayList<>();
         for(Rit r : manager.getRitten()) {
             if (r.getCar().equals(selectedCar.getLicensePlate())) {
@@ -87,27 +61,11 @@ public class HistoryActivity extends ActionBarActivity {
         }
         listView = (ListView) findViewById(R.id.lvRit);
         ritAdapter = new RitListAdapter(this.getApplicationContext(), rittenSelectedCar);
-        //ritAdapter = new RitListAdapter(this.getApplicationContext(), manager.getRitten());
-
-
-        GetRittenTask grTask = new GetRittenTask();
-        //grTask.execute();
-        String json = null;
-        try {
-            json = grTask.execute().get().toString();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        parseJson(json);
-
         listView.setAdapter(ritAdapter);
     }
 
 
     public void parseJson(String json) {
-        //ritten = new ArrayList<>();
         try {
             JSONArray jArray = new JSONArray(json);
 
@@ -123,19 +81,11 @@ public class HistoryActivity extends ActionBarActivity {
                     System.out.println(oneObject.getString("Datum"));
                     String date = oneObject.getString("Datum").substring(0, 10);
                     String date2 = oneObject.getString("Datum");
-                    /*
-                    int year = Integer.parseInt(oneObject.getString("Datum").substring(0, 4));
-                    int month = Integer.parseInt(oneObject.getString("Datum").substring(5, 7));
-                    int day = Integer.parseInt(oneObject.getString("Datum").substring(8, 10));
-
-                    Date date = new Date(year, month, day);
-                    System.out.println(date.toString());*/
 
                     manager.addRit(ritID, car, distance, driver, parseDate(date2));
-//                    ritten.add(new Rit(ritID, car, distance, driver, parseDate(date)));
+
                 } catch (JSONException e) {
                     // Oops
-
                 }
             }
         } catch (JSONException e) {
@@ -180,11 +130,9 @@ public class HistoryActivity extends ActionBarActivity {
     }
 
     public void getRitten() {
-        GetRittenTask grTask = new GetRittenTask();
-        //grTask.execute();
         String json = null;
         try {
-            json = grTask.execute().get().toString();
+            json = new GetRittenTask().execute().get().toString();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -192,5 +140,6 @@ public class HistoryActivity extends ActionBarActivity {
         }
         parseJson(json);
     }
+
 }
 

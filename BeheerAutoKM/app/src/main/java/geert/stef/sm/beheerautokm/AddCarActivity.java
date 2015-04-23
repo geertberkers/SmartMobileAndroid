@@ -103,6 +103,10 @@ public class AddCarActivity extends ActionBarActivity {
                 driver = d;
             }
         }
+        if(driver == null)
+        {
+            driver = new Driver(txtDriver.getText().toString());
+        }
         newCar = new Car(car,carBrand,pic,year,fuel,hp,mileage,kmtank,kmleft,licenseplate,driver);
 
         manager.addCar(newCar);
