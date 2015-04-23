@@ -164,7 +164,7 @@ public class Car implements Parcelable {
     }
     @Override
     public String toString() {
-        return ("KMStand"+ getMileage() + "KMTank"+getKMTank() + "KMNog"+ (getKMTank() - getKMDriven()) );
+        return name;
     }
 
     public boolean isFavorite() { return favorite; }
