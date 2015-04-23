@@ -203,7 +203,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
 
                 Bitmap bitmap = BitmapFactory.decodeStream(stream);
 
-                resizeBitmap(bitmap);
+                bitmap = resizeBitmap(bitmap);
 
                 ivCar.setImageBitmap(bitmap);
                 ivCar.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -389,6 +389,7 @@ public class Overview extends ActionBarActivity implements AdapterView.OnItemCli
         bmOptions.inPurgeable = true;
 
         Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        bitmap = resizeBitmap(bitmap);
         ivCar.setImageBitmap(bitmap);
         setCarImage(bitmap);
 
